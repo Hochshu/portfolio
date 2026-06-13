@@ -1,34 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <!--
-    Production-ready single-file portfolio website
-    Brand: Software Infrastructure
-    Tagline: DevOps
-
-    Notes:
-    - Uses semantic HTML5 structure
-    - Uses CSS custom properties
-    - Uses vanilla JavaScript only
-    - Includes accessibility-oriented carousel and keyboard-friendly interactions
-    - Includes responsive masonry-like cards using CSS columns
-    - Includes lightbox gallery, smooth scroll, back-to-top, staggered reveal animations
+    ============================================================
+    Himanshu — DevOps Portfolio (Retro/Vintage Style)
+    Multi-page feel in single HTML with section-based navigation
+    Tech: Pure HTML, CSS, Vanilla JavaScript
+    Retro Aesthetic: Serif headlines, noise texture, CRT scanlines,
+    terminal-inspired UI, Ocean Blue palette
+    ============================================================
   -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Software Infrastructure — DevOps portfolio website built with pure HTML, CSS, and JavaScript." />
+  <meta name="description" content="Himanshu — DevOps Engineer. Master's student in Information & Electrical Engineering at Hochschule Wismar with 5+ years in IT infrastructure, server administration, cloud platforms, CI/CD pipelines, and systems monitoring. Seeking working student role." />
+  <meta name="keywords" content="DevOps, Infrastructure, Cloud, CI/CD, Linux, Windows, Monitoring, Working Student, Portfolio, Himanshu" />
+  <meta name="author" content="Himanshu" />
   <meta name="theme-color" content="#0077B6" />
-  <title>Software Infrastructure | DevOps</title>
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Himanshu | DevOps Portfolio" />
+  <meta property="og:description" content="DevOps Engineer with 5+ years in infrastructure, cloud, and automation. Master's student at Hochschule Wismar." />
+  <meta property="og:image" content="https://picsum.photos/id/1015/1200/630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Himanshu | DevOps Portfolio" />
+  <meta name="twitter:description" content="DevOps Engineer with 5+ years in infrastructure, cloud, and automation." />
+  <title>Himanshu | DevOps</title>
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Retro serif + modern UI sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=VT323&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Font Awesome Icons -->
+  <!-- Font Awesome -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -39,109 +41,163 @@
 
   <style>
     /* =========================================================
-       CSS Custom Properties
+       CSS Custom Properties — Retro/Vintage Theme System
        ========================================================= */
     :root {
+      /* Fonts */
+      --font-display: "VT323", monospace;        /* Retro terminal headers */
+      --font-accent: "Space Mono", monospace;    /* Terminal accents */
+      --font-ui: "Outfit", system-ui, sans-serif; /* Clean UI text */
+
+      /* Ocean Blue Palette */
       --color-primary: #0077B6;
       --color-primary-dark: #023E8A;
-      --color-bg: #06131f;
-      --color-bg-alt: #0a1d2d;
-      --color-surface: rgba(255, 255, 255, 0.08);
-      --color-surface-strong: rgba(255, 255, 255, 0.12);
-      --color-card: #0d2234;
-      --color-text: #f4f8fb;
-      --color-text-muted: #bfd3e3;
-      --color-border: rgba(255, 255, 255, 0.12);
-      --color-shadow: rgba(0, 0, 0, 0.28);
-      --color-success: #2ec4b6;
-      --color-warning: #ffb703;
-      --color-danger: #ef476f;
-      --gradient-primary: linear-gradient(135deg, #0077B6 0%, #023E8A 100%);
-      --gradient-overlay: linear-gradient(180deg, rgba(2, 62, 138, 0.15), rgba(6, 19, 31, 0.9));
-      --radius-sm: 10px;
-      --radius-md: 16px;
-      --radius-lg: 24px;
-      --radius-pill: 999px;
-      --shadow-sm: 0 8px 22px var(--color-shadow);
-      --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.36);
-      --max-width: 1180px;
-      --header-height: 96px;
-      --transition-fast: 180ms ease;
-      --transition-normal: 320ms ease;
-      --transition-slow: 500ms ease;
-      --section-space: clamp(4rem, 7vw, 6.5rem);
+      --color-primary-light: #48CAE4;
+      --color-primary-muted: #90E0EF;
+
+      /* Light Theme (Default) */
+      --bg-base: #FFFFFF;
+      --bg-alt: #F0F4F8;
+      --bg-card: #FFFFFF;
+      --bg-elevated: #FAFAFA;
+      --text-primary: #1A1A2E;
+      --text-secondary: #4A4A6A;
+      --text-muted: #6B6B8A;
+      --text-inverse: #FFFFFF;
+      --border-color: #D0D8E0;
+      --border-strong: #A8B4C0;
+      --shadow-sm: 0 2px 8px rgba(2, 62, 138, 0.08);
+      --shadow-md: 0 8px 24px rgba(2, 62, 138, 0.12);
+      --shadow-lg: 0 16px 48px rgba(2, 62, 138, 0.16);
       --focus-ring: 0 0 0 3px rgba(0, 119, 182, 0.35);
-      --container-pad: clamp(1rem, 3vw, 1.5rem);
+      --overlay-scrim: rgba(2, 62, 138, 0.5);
+
+      /* Retro Effects */
+      --noise-opacity: 0.03;
+      --scanline-opacity: 0.04;
+      --crt-glow: 0 0 20px rgba(0, 119, 182, 0.15);
+
+      /* Layout */
+      --max-width: 1200px;
+      --header-height: 88px;
+      --section-space: clamp(5rem, 10vw, 8rem);
+      --container-pad: clamp(1.5rem, 4vw, 2.5rem);
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --transition-fast: 150ms ease;
+      --transition-normal: 250ms ease;
+      --transition-slow: 400ms ease;
+
+      /* Particle Canvas */
+      --particle-count: 60;
+      --particle-color: rgba(0, 119, 182, 0.4);
+      --particle-color-accent: rgba(72, 202, 228, 0.6);
+      --particle-size-min: 1;
+      --particle-size-max: 3;
+      --particle-speed: 0.3;
+    }
+
+    /* Dark Theme Override */
+    [data-theme="dark"] {
+      --bg-base: #0D1117;
+      --bg-alt: #161B22;
+      --bg-card: #161B22;
+      --bg-elevated: #1F242C;
+      --text-primary: #E6EDF3;
+      --text-secondary: #A8B4C0;
+      --text-muted: #7D8590;
+      --text-inverse: #0D1117;
+      --border-color: #30363D;
+      --border-strong: #484F58;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+      --focus-ring: 0 0 0 3px rgba(72, 202, 228, 0.4);
+      --overlay-scrim: rgba(0, 0, 0, 0.7);
+      --particle-color: rgba(72, 202, 228, 0.5);
+      --particle-color-accent: rgba(0, 119, 182, 0.7);
     }
 
     /* =========================================================
-       Reset and Base
+       Reset & Base
        ========================================================= */
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html {
       scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *,
-      *::before,
-      *::after {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
       }
+      #heroCanvas { display: none !important; }
+      .hero-static-fallback { display: block !important; }
     }
 
     body {
-      margin: 0;
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top right, rgba(0, 119, 182, 0.16), transparent 28%),
-        radial-gradient(circle at left center, rgba(2, 62, 138, 0.18), transparent 24%),
-        linear-gradient(180deg, #05111b 0%, #071725 50%, #06131f 100%);
-      color: var(--color-text);
-      line-height: 1.65;
-      text-rendering: optimizeLegibility;
-      -webkit-font-smoothing: antialiased;
+      font-family: var(--font-ui);
+      background: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.7;
+      font-size: 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background var(--transition-normal), color var(--transition-normal);
     }
 
-    img {
-      display: block;
-      max-width: 100%;
+    /* Global Noise Texture Overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: var(--noise-opacity);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    /* CRT Scanlines (subtle) */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+      pointer-events: none;
+      opacity: var(--scanline-opacity);
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.08) 2px,
+        rgba(0,0,0,0.08) 4px
+      );
+      mix-blend-mode: multiply;
     }
 
-    button,
-    input,
-    textarea {
-      font: inherit;
+    [data-theme="dark"] body::after {
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255,255,255,0.03) 2px,
+        rgba(255,255,255,0.03) 4px
+      );
     }
 
-    button {
-      cursor: pointer;
-      border: 0;
-      background: none;
-      color: inherit;
-    }
-
-    :focus-visible {
-      outline: none;
-      box-shadow: var(--focus-ring);
-      border-radius: 8px;
-    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; color: inherit; }
+    ul, ol { list-style: none; }
 
     .container {
       width: min(100%, var(--max-width));
@@ -149,2015 +205,1539 @@
       padding-inline: var(--container-pad);
     }
 
-    .section {
-      padding-block: var(--section-space);
-      scroll-margin-top: calc(var(--header-height) + 1rem);
-    }
-
-    .section-header {
-      max-width: 720px;
-      margin-bottom: 2.25rem;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      padding: 0.45rem 0.85rem;
-      margin-bottom: 1rem;
-      border: 1px solid rgba(0, 119, 182, 0.35);
-      border-radius: var(--radius-pill);
-      background: rgba(0, 119, 182, 0.1);
-      color: #9bdcff;
-      font-size: 0.86rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    h1,
-    h2,
-    h3 {
-      margin: 0 0 0.75rem;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-    }
-
-    h1 {
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      font-weight: 800;
-    }
-
-    h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800;
-    }
-
-    h3 {
-      font-size: 1.2rem;
-      font-weight: 700;
-    }
-
-    p {
-      margin: 0 0 1rem;
-      color: var(--color-text-muted);
-    }
+    .section { padding-block: var(--section-space); }
 
     .sr-only {
-      position: absolute !important;
-      width: 1px;
-      height: 1px;
-      margin: -1px;
-      padding: 0;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    .grid-two {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.5rem;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.65rem;
-      padding: 0.95rem 1.25rem;
-      border-radius: var(--radius-pill);
-      border: 1px solid transparent;
-      font-weight: 700;
-      transition: transform var(--transition-fast), background var(--transition-normal), border-color var(--transition-normal), opacity var(--transition-normal);
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-primary {
-      background: var(--gradient-primary);
-      color: #fff;
-      box-shadow: 0 18px 35px rgba(0, 119, 182, 0.26);
-    }
-
-    .btn-secondary {
-      border-color: rgba(255, 255, 255, 0.16);
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--color-text);
-    }
-
-    .pill-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      padding: 0;
-      margin: 1.2rem 0 0;
-      list-style: none;
-    }
-
-    .pill-list li {
-      padding: 0.55rem 0.9rem;
-      border-radius: var(--radius-pill);
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--color-border);
-      color: #d8e7f1;
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
-
-    /* =========================================================
-       Header and Navigation
-       ========================================================= */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(14px);
-      background: rgba(6, 19, 31, 0.72);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-    }
-
-    .nav-wrap {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      min-height: var(--header-height);
-      gap: 1rem;
-      padding-block: 0.8rem;
-    }
-
-    .nav-empty {
-      min-height: 1px;
-    }
-
-    .brand-block {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.45rem;
-      text-align: center;
-    }
-
-    .brand-logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.45rem 0.9rem;
-      border-radius: var(--radius-pill);
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--color-border);
-      color: #fff;
-      font-weight: 800;
-      letter-spacing: 0.02em;
-    }
-
-    .brand-mark {
-      display: inline-grid;
-      place-items: center;
-      width: 2rem;
-      height: 2rem;
-      border-radius: 50%;
-      background: var(--gradient-primary);
-      box-shadow: 0 10px 24px rgba(0, 119, 182, 0.35);
-    }
-
-    .brand-tagline {
-      color: #a9c9dc;
-      font-size: 0.92rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .nav-toggle {
-      display: none;
-      justify-self: end;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.75rem 1rem;
-      border-radius: var(--radius-pill);
-      border: 1px solid var(--color-border);
-      background: rgba(255, 255, 255, 0.05);
-      font-weight: 700;
-    }
-
-    .primary-nav {
-      grid-column: 1 / -1;
-      display: flex;
-      justify-content: center;
-    }
-
-    .nav-list {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.35rem;
-      padding: 0.45rem;
-      margin: 0;
-      list-style: none;
-      border-radius: var(--radius-pill);
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .nav-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      padding: 0.7rem 1rem;
-      border-radius: var(--radius-pill);
-      color: #d7e7f3;
-      font-weight: 600;
-      transition: background var(--transition-normal), color var(--transition-normal), transform var(--transition-fast);
-    }
-
-    .nav-link:hover,
-    .nav-link.active {
-      background: rgba(0, 119, 182, 0.16);
-      color: #ffffff;
-      transform: translateY(-1px);
-    }
-
-    /* =========================================================
-       Hero Carousel
-       ========================================================= */
-    .hero {
-      padding-top: 2rem;
-    }
-
-    .hero-shell {
-      position: relative;
-      overflow: hidden;
-      border-radius: calc(var(--radius-lg) + 6px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(255, 255, 255, 0.04);
-      box-shadow: var(--shadow-lg);
-      min-height: min(86svh, 780px);
-      isolation: isolate;
-    }
-
-    .carousel-status {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      z-index: 5;
-    }
-
-    .hero-track {
-      position: relative;
-      min-height: inherit;
-      
-    }
-
-    .hero-slide {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      align-items: end;
-      opacity: 0;
-      visibility: hidden;
-      transform: scale(1.03);
-      transition: opacity 800ms ease, transform 1200ms ease, visibility 800ms ease;
-    }
-
-    .hero-slide.is-active {
-      opacity: 1;
-      visibility: visible;
-      transform: scale(1);
-    }
-
-    .hero-media {
-      position: absolute;
-      inset: 0;
-    }
-
-    .hero-media::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(90deg, rgba(6, 19, 31, 0.78), rgba(6, 19, 31, 0.35) 45%, rgba(6, 19, 31, 0.82)),
-        linear-gradient(180deg, rgba(6, 19, 31, 0.12), rgba(6, 19, 31, 0.86));
-    }
-
-    .hero-media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      width: min(100%, 760px);
-      padding: clamp(2rem, 5vw, 4rem);
-    }
-
-    .hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      margin-bottom: 1rem;
-      padding: 0.45rem 0.8rem;
-      border-radius: var(--radius-pill);
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      color: #cceeff;
-      font-size: 0.92rem;
-      font-weight: 700;
-    }
-
-    .hero p {
-      max-width: 62ch;
-      font-size: 1.04rem;
-      color: #d7e7f3;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.85rem;
-      margin-top: 1.5rem;
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 1.75rem;
-    }
-
-    .hero-stat {
-      min-width: 160px;
-      padding: 0.95rem 1rem;
-      border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(8px);
-    }
-
-    .hero-stat strong {
-      display: block;
-      margin-bottom: 0.25rem;
-      color: #ffffff;
-      font-size: 1.2rem;
-    }
-
-    .hero-controls {
-      position: absolute;
-      inset-inline: 1rem;
-      bottom: 1rem;
-      z-index: 4;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .hero-arrows {
-      display: flex;
-      gap: 0.65rem;
-    }
-
-    .carousel-btn,
-    .carousel-dot,
-    .lightbox-btn,
-    .back-to-top {
-      transition: transform var(--transition-fast), background var(--transition-normal), opacity var(--transition-normal);
-    }
-
-    .carousel-btn {
-      width: 3rem;
-      height: 3rem;
-      display: inline-grid;
-      place-items: center;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      color: #fff;
-      backdrop-filter: blur(8px);
-    }
-
-    .carousel-btn:hover,
-    .carousel-dot:hover,
-    .lightbox-btn:hover,
-    .back-to-top:hover {
-      transform: translateY(-2px);
-      background: rgba(0, 119, 182, 0.32);
-    }
-
-    .carousel-dots {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.55rem;
-      align-items: center;
-    }
-
-    .carousel-dot {
-      width: 0.9rem;
-      height: 0.9rem;
-      border-radius: 50%;
-      border: 0;
-      background: rgba(255, 255, 255, 0.35);
-    }
-
-    .carousel-dot[aria-selected="true"] {
-      background: #ffffff;
-      box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.12);
-    }
-
-    .carousel-toggle {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      padding: 0.8rem 1rem;
-      border-radius: var(--radius-pill);
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      font-weight: 700;
-      color: #fff;
-    }
-
-    /* =========================================================
-       Cards and Content Blocks
-       ========================================================= */
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.25rem;
-    }
-
-    .card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.04));
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      padding: 1.4rem;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .card-icon {
-      width: 3rem;
-      height: 3rem;
-      display: inline-grid;
-      place-items: center;
-      margin-bottom: 1rem;
-      border-radius: 14px;
-      background: rgba(0, 119, 182, 0.15);
-      color: #8ed7ff;
-      font-size: 1.2rem;
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 1.5rem;
-    }
-
-    .metric-list {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .metric {
-      padding: 1.1rem;
-      border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--color-border);
-    }
-
-    .metric strong {
-      display: block;
-      color: #fff;
-      font-size: 1.4rem;
-      margin-bottom: 0.35rem;
-    }
-
-    /* =========================================================
-       Masonry Layout
-       ========================================================= */
-    .masonry {
-      column-count: 3;
-      column-gap: 1.25rem;
-    }
-
-    .masonry-item {
-      break-inside: avoid;
-      margin-bottom: 1.25rem;
-    }
-
-    .project-card {
-      overflow: hidden;
-      padding: 0;
-    }
-
-    .project-thumb {
-      position: relative;
-      overflow: hidden;
-      border-bottom: 1px solid var(--color-border);
-    }
-
-    .project-thumb img {
-      width: 100%;
-      height: auto;
-      transition: transform 600ms ease;
-    }
-
-    .project-card:hover .project-thumb img {
-      transform: scale(1.04);
-    }
-
-    .project-body {
-      padding: 1.2rem;
-    }
-
-    .project-topline {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .project-tag {
-      display: inline-flex;
-      padding: 0.35rem 0.65rem;
-      border-radius: var(--radius-pill);
-      background: rgba(0, 119, 182, 0.12);
-      color: #9ddcff;
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .project-links {
-      display: flex;
-      gap: 0.75rem;
-      margin-top: 1rem;
-    }
-
-    .text-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      color: #bde7ff;
-      font-weight: 700;
-    }
-
-    .text-link:hover {
-      color: #ffffff;
-    }
-
-    /* =========================================================
-       Timeline
-       ========================================================= */
-    .timeline {
-      position: relative;
-      display: grid;
-      gap: 1rem;
-      padding-left: 1.1rem;
-    }
-
-    .timeline::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0.2rem;
-      width: 2px;
-      background: linear-gradient(180deg, rgba(0,119,182,0.8), rgba(255,255,255,0.1));
-    }
-
-    .timeline-item {
-      position: relative;
-      padding: 1.2rem 1.2rem 1.2rem 1.4rem;
-      border-radius: var(--radius-md);
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--color-border);
-    }
-
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      top: 1.35rem;
-      left: -1.02rem;
-      width: 0.8rem;
-      height: 0.8rem;
-      border-radius: 50%;
-      background: var(--color-primary);
-      box-shadow: 0 0 0 6px rgba(0, 119, 182, 0.15);
-    }
-
-    .timeline-meta {
-      color: #a8d6ef;
-      font-size: 0.92rem;
-      font-weight: 700;
-      margin-bottom: 0.45rem;
-    }
-
-    /* =========================================================
-       Gallery and Lightbox
-       ========================================================= */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .gallery-item {
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--color-border);
-      background: rgba(255,255,255,0.04);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .gallery-item img {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      transition: transform 500ms ease, filter 500ms ease;
-    }
-
-    .gallery-item:hover img,
-    .gallery-item:focus-visible img {
-      transform: scale(1.05);
-      filter: saturate(1.1);
-    }
-
-    .gallery-overlay {
-      position: absolute;
-      inset: auto 0 0 0;
-      padding: 0.9rem;
-      background: linear-gradient(180deg, transparent, rgba(6, 19, 31, 0.88));
-      color: #fff;
-      font-weight: 700;
-      font-size: 0.95rem;
-    }
-
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      z-index: 2000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      background: rgba(3, 10, 18, 0.88);
-      backdrop-filter: blur(8px);
-    }
-
-    .lightbox[aria-hidden="false"] {
-      display: flex;
-    }
-
-    .lightbox-dialog {
-      position: relative;
-      width: min(100%, 980px);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: #06131f;
-      box-shadow: var(--shadow-lg);
-    }
-
-    .lightbox-dialog img {
-      width: 100%;
-      max-height: 78vh;
-      object-fit: contain;
-      background: #06131f;
-    }
-
-    .lightbox-caption {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 1rem 1.2rem;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      color: #d7e7f3;
-    }
-
-    .lightbox-btn {
-      width: 3rem;
-      height: 3rem;
-      display: inline-grid;
-      place-items: center;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.14);
-      color: #fff;
-    }
-
-    .lightbox-close {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      z-index: 2;
-    }
-
-    .lightbox-nav {
-      position: absolute;
-      inset: 50% 1rem auto 1rem;
-      transform: translateY(-50%);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      pointer-events: none;
-    }
-
-    .lightbox-nav .lightbox-btn {
-      pointer-events: auto;
-    }
-
-    /* =========================================================
-       Contact
-       ========================================================= */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
-      gap: 1.5rem;
-    }
-
-    .contact-list {
-      display: grid;
-      gap: 1rem;
-      margin-top: 1.25rem;
-    }
-
-    .contact-item {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-      padding: 1rem;
-      border-radius: var(--radius-md);
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--color-border);
-    }
-
-    .contact-icon {
-      width: 2.8rem;
-      height: 2.8rem;
-      display: inline-grid;
-      place-items: center;
-      flex-shrink: 0;
-      border-radius: 14px;
-      background: rgba(0,119,182,0.16);
-      color: #9cdcff;
-    }
-
-    .form-grid {
-      display: grid;
-      gap: 1rem;
-    }
-
-    .field-group {
-      display: grid;
-      gap: 0.45rem;
-    }
-
-    label {
-      color: #e4f1f8;
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      padding: 0.95rem 1rem;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.05);
-      color: #fff;
-      transition: border-color var(--transition-normal), background var(--transition-normal), box-shadow var(--transition-normal);
-    }
-
-    input::placeholder,
-    textarea::placeholder {
-      color: #93afc2;
-    }
-
-    input:focus,
-    textarea:focus {
-      border-color: rgba(0, 119, 182, 0.7);
-      background: rgba(255,255,255,0.08);
-      box-shadow: var(--focus-ring);
-      outline: none;
-    }
-
-    textarea {
-      min-height: 170px;
-      resize: vertical;
-    }
-
-    .social-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      margin-top: 1.2rem;
-    }
-
-    .social-link {
-      width: 2.85rem;
-      height: 2.85rem;
-      display: inline-grid;
-      place-items: center;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: #fff;
-    }
-
-    .social-link:hover {
-      background: rgba(0,119,182,0.22);
-      transform: translateY(-2px);
-    }
-
-    /* =========================================================
-       Footer and Utilities
-       ========================================================= */
-    .site-footer {
-      padding-block: 1.3rem 2rem;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .footer-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-      color: #b6cad8;
-      font-size: 0.95rem;
-    }
-
-    .footer-inline {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .back-to-top {
-      position: fixed;
-      right: 1rem;
-      bottom: 1rem;
-      z-index: 999;
-      width: 3.15rem;
-      height: 3.15rem;
-      display: inline-grid;
-      place-items: center;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(2, 62, 138, 0.92);
-      color: #fff;
-      box-shadow: var(--shadow-sm);
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(10px);
-    }
-
-    .back-to-top.is-visible {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
     }
 
     .skip-link {
-      position: absolute;
-      left: 1rem;
-      top: -100px;
-      z-index: 3000;
-      padding: 0.85rem 1rem;
-      border-radius: 12px;
-      background: #ffffff;
-      color: #001219;
-      font-weight: 700;
-      transition: top var(--transition-fast);
+      position: absolute; left: var(--container-pad); top: -120px;
+      z-index: 10000; padding: 0.75rem 1rem;
+      background: var(--color-primary); color: var(--text-inverse);
+      font-family: var(--font-accent); font-size: 0.875rem;
+      border-radius: var(--radius-sm); transition: top var(--transition-fast);
     }
-
-    .skip-link:focus {
-      top: 1rem;
-    }
+    .skip-link:focus { top: var(--container-pad); }
 
     /* =========================================================
-       Reveal Animations
+       Typography — Retro Style
        ========================================================= */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 700ms ease, transform 700ms ease;
-      transition-delay: var(--delay, 0ms);
+    .display-font { font-family: var(--font-display); letter-spacing: 0.05em; }
+    .mono-font { font-family: var(--font-accent); }
+
+    h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.15; font-weight: 400; }
+
+    h1 { font-size: clamp(3rem, 8vw, 6rem); text-transform: uppercase; letter-spacing: 0.1em; }
+    h2 { font-size: clamp(2rem, 5vw, 3.5rem); text-transform: uppercase; letter-spacing: 0.08em; }
+    h3 { font-size: clamp(1.5rem, 3vw, 2rem); text-transform: uppercase; letter-spacing: 0.06em; }
+    h4 { font-size: clamp(1.125rem, 2vw, 1.375rem); text-transform: uppercase; letter-spacing: 0.04em; }
+
+    .section-header { max-width: 720px; margin-bottom: 3rem; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      margin-bottom: 1rem; padding: 0.35rem 0.75rem;
+      border: 1px solid var(--border-color); border-radius: var(--radius-sm);
+      font-family: var(--font-accent); font-size: 0.75rem; text-transform: uppercase;
+      letter-spacing: 0.15em; color: var(--color-primary);
     }
 
-    .reveal.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    p { color: var(--text-secondary); margin-bottom: 1rem; max-width: 65ch; }
+    .lead { font-size: 1.125rem; color: var(--text-primary); font-weight: 300; }
+
+    /* Retro terminal prompt style */
+    .prompt::before { content: "$ "; color: var(--color-primary); font-family: var(--font-accent); }
+    .prompt-error::before { content: "> "; color: #E63946; font-family: var(--font-accent); }
 
     /* =========================================================
-       Responsive
+       Buttons & Interactive Elements
        ========================================================= */
-    @media (max-width: 1100px) {
-      .feature-grid,
-      .gallery-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.875rem 1.5rem; border-radius: var(--radius-sm);
+      font-family: var(--font-accent); font-size: 0.875rem; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      border: 2px solid transparent; cursor: pointer;
+      transition: all var(--transition-fast);
+      position: relative; overflow: hidden;
+    }
+    .btn::before {
+      content: ""; position: absolute; inset: 0;
+      background: currentColor; opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+    .btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
 
-      .about-grid,
-      .contact-grid,
-      .grid-two {
-        grid-template-columns: 1fr;
-      }
+    .btn-primary {
+      background: var(--color-primary); color: var(--text-inverse);
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-primary:hover { background: var(--color-primary-dark); border-color: var(--color-primary-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .btn-primary:active { transform: translateY(0); }
 
-      .masonry {
-        column-count: 2;
-      }
+    .btn-secondary {
+      background: transparent; color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+    .btn-secondary:hover { border-color: var(--color-primary); color: var(--color-primary); background: color-mix(in srgb, var(--color-primary) 8%, transparent); }
+
+    .btn-ghost {
+      background: transparent; color: var(--text-secondary);
+      border-color: transparent; padding: 0.5rem 0.75rem;
+    }
+    .btn-ghost:hover { color: var(--color-primary); background: color-mix(in srgb, var(--color-primary) 10%, transparent); }
+
+    .btn-icon { width: 40px; height: 40px; padding: 0; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; }
+
+    /* =========================================================
+       Header / Navigation
+       ========================================================= */
+    .site-header {
+      position: sticky; top: 0; z-index: 1000;
+      background: color-mix(in srgb, var(--bg-base) 90%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      transition: background var(--transition-normal), border-color var(--transition-normal);
     }
 
-    @media (max-width: 840px) {
-      :root {
-        --header-height: 84px;
-      }
-
-      .nav-wrap {
-        grid-template-columns: auto auto;
-      }
-
-      .nav-empty {
-        display: none;
-      }
-
-      .brand-block {
-        align-items: flex-start;
-        text-align: left;
-      }
-
-      .nav-toggle {
-        display: inline-flex;
-      }
-
-      .primary-nav {
-        display: none;
-        grid-column: 1 / -1;
-        width: 100%;
-        justify-content: stretch;
-      }
-
-      .primary-nav.open {
-        display: block;
-      }
-
-      .nav-list {
-        flex-direction: column;
-        align-items: stretch;
-        border-radius: var(--radius-lg);
-        padding: 0.6rem;
-      }
-
-      .nav-link {
-        justify-content: center;
-      }
-
-      .hero-shell {
-        min-height: 680px;
-      }
-
-      .hero-controls {
-        flex-wrap: wrap;
-      }
-
-      .feature-grid,
-      .gallery-grid,
-      .metric-list {
-        grid-template-columns: 1fr;
-      }
-
-      .masonry {
-        column-count: 1;
-      }
-
-      .footer-row {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+    .nav-wrap {
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      align-items: center; min-height: var(--header-height); gap: 1rem;
     }
 
-    @media (max-width: 600px) {
-      .hero-actions,
-      .hero-meta {
-        flex-direction: column;
-        align-items: stretch;
-      }
+    .nav-empty { min-height: 1px; }
 
-      .carousel-toggle {
-        width: 100%;
-        justify-content: center;
-      }
+    .brand-block { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; text-align: center; }
+    .brand-logo {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      padding: 0.5rem 1rem; border: 2px solid var(--border-color);
+      border-radius: var(--radius-sm); font-family: var(--font-display);
+      font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .brand-logo:hover { border-color: var(--color-primary); box-shadow: var(--crt-glow); }
+    .brand-mark { width: 36px; height: 36px; display: inline-grid; place-items: center; background: var(--color-primary); color: var(--text-inverse); font-family: var(--font-display); font-size: 1.25rem; border-radius: 4px; }
+    .brand-tagline { font-family: var(--font-accent); font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--text-muted); }
 
-      .hero-arrows,
-      .carousel-dots {
-        width: 100%;
-        justify-content: center;
-      }
+    .header-actions { display: flex; justify-content: flex-end; align-items: center; gap: 0.75rem; }
 
-      .hero-controls {
-        justify-content: center;
-      }
+    .theme-toggle, .nav-toggle {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.5rem 0.75rem; border-radius: var(--radius-sm);
+      background: var(--bg-alt); border: 1px solid var(--border-color);
+      font-family: var(--font-accent); font-size: 0.75rem; text-transform: uppercase;
+      transition: all var(--transition-fast);
+    }
+    .theme-toggle:hover, .nav-toggle:hover { border-color: var(--color-primary); color: var(--color-primary); }
 
-      .lightbox-caption {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+    .nav-toggle { display: none; }
+
+    .primary-nav { grid-column: 1 / -1; display: flex; justify-content: center; }
+    .nav-list {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem;
+      padding: 0.5rem; margin: 0;
+      background: var(--bg-alt); border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+    }
+    .nav-link {
+      display: inline-flex; align-items: center; gap: 0.375rem;
+      padding: 0.5rem 1rem; border-radius: var(--radius-sm);
+      font-family: var(--font-accent); font-size: 0.75rem; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--text-secondary);
+      transition: all var(--transition-fast);
+    }
+    .nav-link:hover, .nav-link.active { background: var(--color-primary); color: var(--text-inverse); }
+
+    /* =========================================================
+       Hero Section — Canvas Particle Background
+       ========================================================= */
+    .hero { position: relative; padding-top: calc(var(--header-height) + 2rem); min-height: 100vh; display: flex; align-items: center; }
+    .hero-shell { position: relative; width: 100%; border-radius: var(--radius-lg); overflow: hidden; border: 2px solid var(--border-color); background: var(--bg-base); box-shadow: var(--shadow-lg); isolation: isolate; }
+
+    /* Canvas Particle Background */
+    #heroCanvas {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      display: block; z-index: 0;
+    }
+
+    /* Static Fallback for Reduced Motion */
+    .hero-static-fallback {
+      position: absolute; inset: 0; z-index: 0; display: none;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 0%, color-mix(in srgb, var(--color-primary) 15%, transparent) 0%, transparent 70%),
+        radial-gradient(circle at 80% 20%, color-mix(in srgb, var(--color-primary-light) 10%, transparent) 0%, transparent 40%),
+        radial-gradient(circle at 20% 80%, color-mix(in srgb, var(--color-primary) 8%, transparent) 0%, transparent 30%),
+        linear-gradient(180deg, var(--bg-base) 0%, var(--bg-alt) 100%);
+    }
+
+    .hero-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(135deg, rgba(2,62,138,0.05) 0%, transparent 50%, rgba(0,119,182,0.03) 100%); }
+    [data-theme="dark"] .hero-overlay { background: linear-gradient(135deg, rgba(0,119,182,0.08) 0%, transparent 50%, rgba(72,202,228,0.05) 100%); }
+
+    .hero-content { position: relative; z-index: 2; width: min(100%, 800px); padding: clamp(3rem, 8vw, 5rem); text-align: center; }
+    .hero-kicker { display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; font-family: var(--font-accent); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-primary); }
+    .hero-kicker .dot { width: 8px; height: 8px; background: var(--color-primary); border-radius: 50%; animation: blink 1.5s ease-in-out infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    @media (prefers-reduced-motion: reduce) { .hero-kicker .dot { animation: none; opacity: 1; } }
+
+    .hero h1 { margin-bottom: 1.5rem; color: var(--text-primary); }
+    .hero .lead { max-width: 60ch; margin: 0 auto 2rem; font-size: 1.125rem; line-height: 1.8; }
+    .hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 1rem; }
+    .hero-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color); }
+    .stat-item { text-align: center; }
+    .stat-value { display: block; font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); color: var(--color-primary); line-height: 1; }
+    .stat-label { font-family: var(--font-accent); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+
+    /* =========================================================
+       Layout Components
+       ========================================================= */
+
+    /* Feature Grid */
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .feature-card {
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: var(--radius-md); padding: 2rem; transition: all var(--transition-normal);
+      position: relative; overflow: hidden;
+    }
+    .feature-card::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+      transform: scaleX(0); transform-origin: left; transition: transform var(--transition-normal);
+    }
+    .feature-card:hover { border-color: var(--color-primary); box-shadow: var(--shadow-md); transform: translateY(-4px); }
+    .feature-card:hover::before { transform: scaleX(1); }
+    .feature-icon { width: 48px; height: 48px; display: inline-flex; align-items: center; justify-content: center; background: color-mix(in srgb, var(--color-primary) 12%, transparent); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--color-primary); font-size: 1.5rem; margin-bottom: 1.25rem; }
+    .feature-card h3 { margin-bottom: 0.75rem; color: var(--text-primary); }
+    .feature-card p { margin: 0; font-size: 0.9375rem; }
+
+    /* Two Column Grid */
+    .grid-two { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+
+    /* Masonry Grid */
+    .masonry { column-count: 3; column-gap: 1.5rem; }
+    .masonry-item { break-inside: avoid; margin-bottom: 1.5rem; }
+    .project-card {
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: var(--radius-md); overflow: hidden; transition: all var(--transition-normal);
+    }
+    .project-card:hover { border-color: var(--color-primary); box-shadow: var(--shadow-md); transform: translateY(-4px); }
+    .project-thumb { position: relative; overflow: hidden; aspect-ratio: 4/3; }
+    .project-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-slow); }
+    .project-card:hover .project-thumb img { transform: scale(1.05); }
+    .project-thumb .tag { position: absolute; top: 1rem; left: 1rem; padding: 0.25rem 0.625rem; background: var(--color-primary); color: var(--text-inverse); font-family: var(--font-accent); font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.1em; border-radius: var(--radius-sm); }
+    .project-body { padding: 1.5rem; }
+    .project-body h3 { margin-bottom: 0.75rem; color: var(--text-primary); font-size: 1.25rem; }
+    .project-body p { margin-bottom: 1rem; font-size: 0.9375rem; }
+    .project-links { display: flex; gap: 1rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-color); }
+    .project-links a { font-family: var(--font-accent); font-size: 0.8125rem; color: var(--color-primary); transition: color var(--transition-fast); }
+    .project-links a:hover { color: var(--color-primary-dark); text-decoration: underline; }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before { content: ""; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--color-primary), var(--color-primary-light)); }
+    .timeline-item { position: relative; padding: 1.5rem 0 1.5rem 2rem; }
+    .timeline-item::before { content: ""; position: absolute; left: -22px; top: 1.75rem; width: 14px; height: 14px; border-radius: 50%; background: var(--bg-base); border: 3px solid var(--color-primary); box-shadow: 0 0 0 4px var(--bg-base), var(--crt-glow); z-index: 1; }
+    .timeline-meta { font-family: var(--font-accent); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-primary); margin-bottom: 0.5rem; display: block; }
+    .timeline-item h3 { margin-bottom: 0.5rem; color: var(--text-primary); font-size: 1.25rem; }
+    .timeline-item p { margin: 0; }
+
+    /* Gallery Grid */
+    .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .gallery-item { position: relative; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-color); background: var(--bg-alt); aspect-ratio: 1; cursor: zoom-in; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-slow); }
+    .gallery-item:hover img { transform: scale(1.08); }
+    .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, var(--overlay-scrim) 100%); opacity: 0; transition: opacity var(--transition-normal); display: flex; align-items: flex-end; padding: 1rem; color: var(--text-inverse); font-family: var(--font-accent); font-size: 0.8125rem; }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+    /* Testimonial Slider */
+    .testimonial-shell { position: relative; max-width: 800px; margin: 0 auto; overflow: hidden; }
+    .testimonial-track { display: flex; transition: transform var(--transition-slow); will-change: transform; }
+    .testimonial-slide { min-width: 100%; padding: 0 1rem; }
+    .testimonial-card {
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: var(--radius-md); padding: 2.5rem; text-align: center;
+      position: relative;
+    }
+    .testimonial-card::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light)); }
+    .testimonial-card blockquote { margin: 0 0 1.5rem; font-size: 1.125rem; line-height: 1.8; color: var(--text-primary); font-style: italic; }
+    .testimonial-meta { font-family: var(--font-accent); font-size: 0.8125rem; color: var(--text-muted); }
+    .testimonial-meta strong { color: var(--text-primary); display: block; margin-bottom: 0.25rem; }
+    .testimonial-controls { display: flex; justify-content: center; gap: 0.75rem; margin-top: 2rem; }
+    .testimonial-btn { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--bg-alt); border: 1px solid var(--border-color); color: var(--text-secondary); transition: all var(--transition-fast); }
+    .testimonial-btn:hover { background: var(--color-primary); border-color: var(--color-primary); color: var(--text-inverse); }
+
+    /* Contact Form */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .contact-info { padding-right: 2rem; }
+    .contact-item { display: flex; gap: 1rem; margin-bottom: 2rem; }
+    .contact-icon { width: 48px; height: 48px; display: inline-flex; align-items: center; justify-content: center; background: color-mix(in srgb, var(--color-primary) 12%, transparent); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--color-primary); font-size: 1.25rem; flex-shrink: 0; }
+    .contact-item h4 { margin-bottom: 0.25rem; color: var(--text-primary); }
+    .contact-item p { margin: 0; color: var(--text-secondary); }
+
+    .form-field { margin-bottom: 1.5rem; }
+    .form-field label { display: block; font-family: var(--font-accent); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); margin-bottom: 0.5rem; }
+    .form-field input, .form-field textarea {
+      width: 100%; padding: 0.875rem 1rem; border: 2px solid var(--border-color);
+      border-radius: var(--radius-sm); background: var(--bg-base); color: var(--text-primary);
+      font-family: var(--font-ui); font-size: 1rem; transition: all var(--transition-fast);
+    }
+    .form-field input:focus, .form-field textarea:focus { outline: none; border-color: var(--color-primary); box-shadow: var(--focus-ring); }
+    .form-field input[aria-invalid="true"], .form-field textarea[aria-invalid="true"] { border-color: #E63946; box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.2); }
+    .form-field textarea { min-height: 150px; resize: vertical; }
+    .field-error { display: none; font-family: var(--font-accent); font-size: 0.75rem; color: #E63946; margin-top: 0.5rem; }
+    .field-error.visible { display: block; }
+    .form-status { min-height: 1.5rem; font-family: var(--font-accent); font-size: 0.8125rem; margin-top: 1rem; }
+    .form-status.success { color: #2ECC71; }
+    .form-status.error { color: #E63946; }
+
+    /* Social Links */
+    .social-links { display: flex; gap: 0.75rem; margin-top: 2rem; }
+    .social-link { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); background: var(--bg-alt); border: 1px solid var(--border-color); color: var(--text-secondary); transition: all var(--transition-fast); }
+    .social-link:hover { background: var(--color-primary); border-color: var(--color-primary); color: var(--text-inverse); transform: translateY(-2px); }
+
+    /* Footer */
+    .site-footer { padding: 2rem 0; border-top: 1px solid var(--border-color); background: var(--bg-alt); margin-top: auto; }
+    .footer-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; color: var(--text-muted); font-family: var(--font-accent); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .footer-inline { display: flex; align-items: center; gap: 1.5rem; }
+
+    /* Back to Top */
+    .back-to-top { position: fixed; right: var(--container-pad); bottom: var(--container-pad); z-index: 1000; width: 48px; height: 48px; display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); background: var(--color-primary); border: 2px solid var(--color-primary); color: var(--text-inverse); box-shadow: var(--shadow-md); opacity: 0; visibility: hidden; transform: translateY(20px); transition: all var(--transition-normal); }
+    .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    .back-to-top:hover { background: var(--color-primary-dark); border-color: var(--color-primary-dark); transform: translateY(-4px); }
+
+    /* Lightbox */
+    .lightbox { position: fixed; inset: 0; z-index: 2000; display: none; align-items: center; justify-content: center; padding: 2rem; background: var(--overlay-scrim); backdrop-filter: blur(4px); opacity: 0; transition: opacity var(--transition-normal); }
+    .lightbox.active { display: flex; opacity: 1; }
+    .lightbox-dialog { position: relative; max-width: 90vw; max-height: 90vh; border-radius: var(--radius-md); overflow: hidden; border: 2px solid var(--border-color); background: var(--bg-base); box-shadow: var(--shadow-lg); transform: scale(0.9); transition: transform var(--transition-normal); }
+    .lightbox.active .lightbox-dialog { transform: scale(1); }
+    .lightbox-dialog img { max-width: 90vw; max-height: 70vh; object-fit: contain; }
+    .lightbox-caption { padding: 1rem 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; font-family: var(--font-accent); font-size: 0.8125rem; color: var(--text-secondary); }
+    .lightbox-close, .lightbox-nav-btn { position: absolute; top: 0.75rem; width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-secondary); transition: all var(--transition-fast); z-index: 10; }
+    .lightbox-close { right: 0.75rem; }
+    .lightbox-close:hover { background: #E63946; border-color: #E63946; color: var(--text-inverse); }
+    .lightbox-nav-btn { top: 50%; transform: translateY(-50%); }
+    .lightbox-prev { left: 0.75rem; }
+    .lightbox-next { right: 0.75rem; }
+    .lightbox-nav-btn:hover { background: var(--color-primary); border-color: var(--color-primary); color: var(--text-inverse); }
+
+    /* Reveal Animations */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; transition-delay: var(--delay, 0ms); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* =========================================================
+       Responsive Breakpoints
+       ========================================================= */
+    @media (max-width: 1024px) {
+      .feature-grid, .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .masonry { column-count: 2; }
+      .grid-two, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .contact-info { padding-right: 0; }
+    }
+
+    @media (max-width: 768px) {
+      :root { --header-height: 72px; --section-space: clamp(3.5rem, 8vw, 5rem); }
+      .nav-wrap { grid-template-columns: auto auto; }
+      .nav-empty { display: none; }
+      .brand-block { align-items: flex-start; text-align: left; }
+      .header-actions { gap: 0.5rem; }
+      .nav-toggle { display: inline-flex; }
+      .primary-nav { display: none; grid-column: 1 / -1; width: 100%; }
+      .primary-nav.open { display: block; }
+      .nav-list { flex-direction: column; align-items: stretch; border-radius: var(--radius-md); }
+      .nav-link { justify-content: center; padding: 0.75rem 1rem; }
+      .masonry { column-count: 1; }
+      .feature-grid, .gallery-grid { grid-template-columns: 1fr; }
+      .hero-content { padding: 2rem; }
+      .hero-stats { gap: 1.5rem; }
+      .stat-value { font-size: 2rem; }
+      .testimonial-card { padding: 1.5rem; }
+      .lightbox-nav-btn { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      :root { --container-pad: 1rem; }
+      .hero-actions { flex-direction: column; align-items: center; }
+      .hero-stats { flex-direction: column; gap: 1rem; }
+      .btn { width: 100%; }
+      .footer-row { flex-direction: column; text-align: center; }
+    }
+
+    /* Print Styles */
+    @media print {
+      .site-header, .back-to-top, .lightbox, .theme-toggle, .nav-toggle, .hero { display: none !important; }
+      .section { page-break-inside: avoid; }
+      body::before, body::after { display: none; }
     }
   </style>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <header class="site-header" id="top">
+  <!-- =========================================================
+       HEADER
+       ========================================================= -->
+  <header class="site-header" role="banner">
     <div class="container nav-wrap">
       <div class="nav-empty" aria-hidden="true"></div>
 
       <div class="brand-block">
-        <a href="#home" class="brand-logo" aria-label="Software Infrastructure home">
-          <span class="brand-mark" aria-hidden="true"><i class="fa-solid fa-server"></i></span>
-          <span>Software Infrastructure</span>
+        <a href="#home" class="brand-logo" aria-label="Himanshu — Home">
+          <span class="brand-mark" aria-hidden="true">H</span>
+          <span>Himanshu </span>
         </a>
-        <span class="brand-tagline">DevOps</span>
+        <span class="brand-tagline mono-font">DevOps Engineer</span>
       </div>
 
-      <button
-        class="nav-toggle"
-        id="navToggle"
-        aria-expanded="false"
-        aria-controls="primaryNav"
-        aria-label="Open navigation menu"
-      >
-        <i class="fa-solid fa-bars" aria-hidden="true"></i>
-        <span>Menu</span>
-      </button>
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+          <i class="fa-solid fa-moon" aria-hidden="true"></i>
+          <span class="mono-font">Theme</span>
+        </button>
+
+        <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Open navigation menu">
+          <i class="fa-solid fa-bars" aria-hidden="true"></i>
+          <span class="mono-font">Menu</span>
+        </button>
+      </div>
 
       <nav class="primary-nav" id="primaryNav" aria-label="Primary navigation">
         <ul class="nav-list">
-          <li><a class="nav-link active" href="#home"><i class="fa-solid fa-house"></i>Home</a></li>
-          <li><a class="nav-link" href="#services"><i class="fa-solid fa-layer-group"></i>Services</a></li>
-          <li><a class="nav-link" href="#about"><i class="fa-solid fa-circle-info"></i>About</a></li>
-          <li><a class="nav-link" href="#projects"><i class="fa-solid fa-diagram-project"></i>Projects</a></li>
-          <li><a class="nav-link" href="#experience"><i class="fa-solid fa-timeline"></i>Experience</a></li>
-          <li><a class="nav-link" href="#gallery"><i class="fa-solid fa-images"></i>Gallery</a></li>
-          <li><a class="nav-link" href="#contact"><i class="fa-solid fa-envelope"></i>Contact</a></li>
+          <li><a class="nav-link active" href="#home"><i class="fa-solid fa-house" aria-hidden="true"></i>Home</a></li>
+          <li><a class="nav-link" href="#about"><i class="fa-solid fa-user" aria-hidden="true"></i>About</a></li>
+          <li><a class="nav-link" href="#skills"><i class="fa-solid fa-code" aria-hidden="true"></i>Skills</a></li>
+          <li><a class="nav-link" href="#projects"><i class="fa-solid fa-folder-tree" aria-hidden="true"></i>Projects</a></li>
+          <li><a class="nav-link" href="#experience"><i class="fa-solid fa-briefcase" aria-hidden="true"></i>Experience</a></li>
+          <li><a class="nav-link" href="#gallery"><i class="fa-solid fa-images" aria-hidden="true"></i>Gallery</a></li>
+          <li><a class="nav-link" href="#testimonials"><i class="fa-solid fa-quote-left" aria-hidden="true"></i>Testimonials</a></li>
+          <li><a class="nav-link" href="#contact"><i class="fa-solid fa-envelope" aria-hidden="true"></i>Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main id="main-content">
+  <!-- =========================================================
+       MAIN CONTENT
+       ========================================================= -->
+  <main id="main-content" role="main">
+
+    <!-- HERO SECTION -->
     <section class="hero section" id="home" aria-labelledby="hero-title">
-      <div
-        class="container hero-shell reveal"
-        role="region"
-        aria-roledescription="carousel"
-        aria-label="Featured highlights"
-      >
-        <div class="carousel-status sr-only" id="carouselStatus" aria-live="polite"></div>
+      <div class="container hero-shell">
+        <!-- Canvas Particle Background -->
+        <canvas id="heroCanvas" aria-hidden="true"></canvas>
 
-        <div class="hero-track" id="heroTrack" aria-live="off" aria-atomic="true" >
-          <!-- Slide 1 -->
-          <article
-            class="hero-slide is-active"
-            role="group"
-            aria-roledescription="slide"
-            aria-label="1 of 3"
-            data-index="0"
-          >
-            <div class="hero-media">
-              <img
-                src="https://picsum.photos/id/1015/1600/1000"
-                alt="Modern cloud infrastructure dashboard with blue tones"
-              />
-            </div>
-            <div class="hero-content">
-              <div class="hero-kicker">
-                <i class="fa-solid fa-cloud"></i>
-                Reliable delivery pipelines
-              </div>
-              <h1 id="hero-title">Software Infrastructure built for modern <span style="color:#7fd7ff;">DevOps</span>.</h1>
-              <p>
-                I design resilient delivery systems, automate operational workflows, and create dependable platforms that help engineering teams ship faster with less friction.
-              </p>
-              <div class="hero-actions">
-                <a class="btn btn-primary" href="#projects">
-                  <i class="fa-solid fa-arrow-right"></i>
-                  Explore projects
-                </a>
-                <a class="btn btn-secondary" href="#contact">
-                  <i class="fa-solid fa-paper-plane"></i>
-                  Discuss infrastructure
-                </a>
-              </div>
-              <div class="hero-meta" aria-label="Key portfolio metrics">
-                <div class="hero-stat">
-                  <strong>99.95%</strong>
-                  <span>Target uptime for critical services</span>
-                </div>
-                <div class="hero-stat">
-                  <strong>CI/CD First</strong>
-                  <span>Release workflows designed for repeatability</span>
-                </div>
-                <div class="hero-stat">
-                  <strong>Security Aware</strong>
-                  <span>Policies, observability, and traceability by default</span>
-                </div>
-              </div>
-            </div>
-          </article>
+        <!-- Static Fallback for Reduced Motion -->
+        <div class="hero-static-fallback" aria-hidden="true"></div>
 
-          <!-- Slide 2 -->
-          <article
-            class="hero-slide"
-            role="group"
-            aria-roledescription="slide"
-            aria-label="2 of 3"
-            data-index="1"
-          >
-            <div class="hero-media">
-              <img
-                src="https://picsum.photos/id/1048/1600/1000"
-                alt="Data center corridor representing scalable systems"
-              />
-            </div>
-            <div class="hero-content">
-              <div class="hero-kicker">
-                <i class="fa-solid fa-gears"></i>
-                Automation with intent
-              </div>
-              <h2>From environment setup to production release, every step is <span style="color:#7fd7ff;">systematic</span>.</h2>
-              <p>
-                The focus is practical engineering: versioned infrastructure, observable applications, safer releases, and a platform experience that supports both developers and operators.
-              </p>
-              <ul class="pill-list" aria-label="Core capabilities">
-                <li>Infrastructure as Code</li>
-                <li>Container Platforms</li>
-                <li>Deployment Automation</li>
-                <li>Monitoring and Alerts</li>
-                <li>Cloud Governance</li>
-              </ul>
-            </div>
-          </article>
+        <div class="hero-overlay" aria-hidden="true"></div>
 
-          <!-- Slide 3 -->
-          <article
-            class="hero-slide"
-            role="group"
-            aria-roledescription="slide"
-            aria-label="3 of 3"
-            data-index="2"
-          >
-            <div class="hero-media">
-              <img
-                src="https://picsum.photos/id/180/1600/1000"
-                alt="Engineer workstation with code and monitoring screens"
-              />
-            </div>
-            <div class="hero-content">
-              <div class="hero-kicker">
-                <i class="fa-solid fa-shield-halved"></i>
-                Trust through visibility
-              </div>
-              <h2>Professional infrastructure that balances speed, resilience, and <span style="color:#7fd7ff;">clarity</span>.</h2>
-              <p>
-                This portfolio highlights platform thinking, release discipline, and the technical craft behind stable services, scalable workflows, and operational confidence.
-              </p>
-              <div class="hero-actions">
-                <a class="btn btn-primary" href="#experience">
-                  <i class="fa-solid fa-briefcase"></i>
-                  View experience
-                </a>
-                <a class="btn btn-secondary" href="#gallery">
-                  <i class="fa-solid fa-images"></i>
-                  Open gallery
-                </a>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <div class="hero-controls">
-          <div class="hero-arrows" aria-label="Carousel navigation">
-            <button class="carousel-btn" id="prevSlide" aria-label="Previous slide">
-              <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
-            </button>
-            <button class="carousel-btn" id="nextSlide" aria-label="Next slide">
-              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-            </button>
+        <div class="hero-content reveal">
+          <div class="hero-kicker">
+            <span class="dot" aria-hidden="true"></span>
+            <span class="mono-font">Infrastructure &amp; Operations</span>
           </div>
-
-          <div class="carousel-dots" role="tablist" aria-label="Hero slides">
-            <button class="carousel-dot" role="tab" aria-selected="true" aria-label="Show slide 1" data-slide-to="0"></button>
-            <button class="carousel-dot" role="tab" aria-selected="false" aria-label="Show slide 2" data-slide-to="1"></button>
-            <button class="carousel-dot" role="tab" aria-selected="false" aria-label="Show slide 3" data-slide-to="2"></button>
+          <h1 id="hero-title" class="display-font">Building Reliable Systems</h1>
+          <p class="lead">
+            Master's student in Information &amp; Electrical Engineering at Hochschule Wismar
+            with 5+ years of hands-on experience in IT infrastructure, server administration,
+            cloud platforms, CI/CD pipelines, and systems monitoring.
+          </p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i> View Projects</a>
+            <a href="#contact" class="btn btn-secondary"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Get In Touch</a>
           </div>
-
-          <button class="carousel-toggle" id="toggleAutoplay" aria-pressed="false" aria-label="Pause automatic slide show">
-            <i class="fa-solid fa-pause" aria-hidden="true"></i>
-            <span>Pause slideshow</span>
-          </button>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-value display-font" data-count="5">0</span>
+              <span class="stat-label mono-font">Years Experience</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value display-font" data-count="12">0</span>
+              <span class="stat-label mono-font">Projects Delivered</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value display-font" data-count="99">0</span>
+              <span class="stat-label mono-font">Uptime Target %</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value display-font" data-count="3">0</span>
+              <span class="stat-label mono-font">Cloud Platforms</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="services" aria-labelledby="services-title">
+    <!-- ABOUT SECTION -->
+    <section class="section" id="about" aria-labelledby="about-title">
       <div class="container">
         <div class="section-header reveal">
-          <span class="eyebrow"><i class="fa-solid fa-sitemap"></i> Services</span>
-          <h2 id="services-title">Infrastructure capabilities that support reliable software delivery.</h2>
-          <p>
-            The work centers on delivery automation, scalable runtime environments, visibility across systems, and engineering practices that make operations predictable instead of reactive.
-          </p>
+          <span class="eyebrow mono-font"><i class="fa-solid fa-terminal" aria-hidden="true"></i> About</span>
+          <h2 class="display-font" id="about-title">Profile</h2>
+        </div>
+
+        <div class="grid-two">
+          <div class="reveal" style="--delay: 100ms;">
+            <p class="lead">DevOps Engineer focused on infrastructure reliability, automation, and operational excellence.</p>
+            <p>Currently pursuing a Master's degree in Information &amp; Electrical Engineering at <strong>Hochschule Wismar</strong>, I bring over five years of professional experience across Linux/Windows environments, virtualization, cloud platforms, database management, and CI/CD pipeline engineering.</p>
+            <p>My background spans hands-on server administration, cloud infrastructure provisioning, monitoring system implementation, and process documentation. I'm seeking a <strong>working student role</strong> where I can apply infrastructure and operations skills in a production environment while contributing to IT process improvement and documentation quality.</p>
+
+            <div style="margin-top: 2rem;">
+              <h4 class="mono-font" style="margin-bottom: 1rem; color: var(--text-primary);">Core Competencies</h4>
+              <ul class="pill-list" style="display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding: 0;">
+                <li style="padding: 0.5rem 1rem; background: var(--bg-alt); border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-family: var(--font-accent); font-size: 0.75rem; text-transform: uppercase;">Linux / Windows Admin</li>
+                <li style="padding: 0.5rem 1rem; background: var(--bg-alt); border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-family: var(--font-accent); font-size: 0.75rem; text-transform: uppercase;">Virtualization (VMware, Hyper-V)</li>
+                <li style="padding: 0.5rem 1rem; background: var(--bg-alt); border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-family: var(--font-accent); font-size: 0.75rem; text-transform: uppercase;">Cloud Platforms (AWS, Azure, GCP)</li>
+                <li style="padding: 0.5rem 1rem; background: var(--bg-alt); border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-family: var(--font-accent); font-size: 0.75rem; text-transform: uppercase;">CI/CD (GitLab, Jenkins, GitHub Actions)</li>
+                <li style="padding: 0.5rem 1rem; background: var(--bg-alt); border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-family: var(--font-accent); font-size: 0.75rem; text-transform: uppercase;">Containerization (Docker, K8s)</li>
+                <li style="padding: 0.5rem 1rem; background: var(--bg-alt); border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-family: var(--font-accent); font-size: 0.75rem; text-transform: uppercase;">Monitoring (Prometheus, Grafana, Zabbix)</li>
+                <li style="padding: 0.5rem 1rem; background: var(--bg-alt); border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-family: var(--font-accent); font-size: 0.75rem; text-transform: uppercase;">Databases (PostgreSQL, MySQL, MSSQL)</li>
+                <li style="padding: 0.5rem 1rem; background: var(--bg-alt); border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-family: var(--font-accent); font-size: 0.75rem; text-transform: uppercase;">Scripting (Bash, PowerShell, Python)</li>
+                <li style="padding: 0.5rem 1rem; background: var(--bg-alt); border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-family: var(--font-accent); font-size: 0.75rem; text-transform: uppercase;">IaC (Terraform, Ansible)</li>
+                <li style="padding: 0.5rem 1rem; background: var(--bg-alt); border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-family: var(--font-accent); font-size: 0.75rem; text-transform: uppercase;">Documentation &amp; Runbooks</li>
+              </ul>
+            </div>
+          </div>
+
+          <aside class="reveal" style="--delay: 200ms;">
+            <div class="feature-card" style="height: 100%;">
+              <h3 class="display-font" style="font-size: 1.5rem; margin-bottom: 1.5rem;">Quick Facts</h3>
+              <dl style="display: grid; gap: 1.25rem;">
+                <div style="padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-color);">
+                  <dt class="mono-font" style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.25rem;">Education</dt>
+                  <dd style="color: var(--text-primary);">M.Sc. Information &amp; Electrical Engineering, Hochschule Wismar</dd>
+                </div>
+                <div style="padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-color);">
+                  <dt class="mono-font" style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.25rem;">Experience</dt>
+                  <dd style="color: var(--text-primary);">5+ Years IT Infrastructure &amp; Operations</dd>
+                </div>
+                <div style="padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-color);">
+                  <dt class="mono-font" style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.25rem;">Location</dt>
+                  <dd style="color: var(--text-primary);">Wismar, Mecklenburg-Vorpommern, DE</dd>
+                </div>
+                <div style="padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-color);">
+                  <dt class="mono-font" style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.25rem;">Availability</dt>
+                  <dd style="color: var(--text-primary);">Working Student (20 hrs/week)</dd>
+                </div>
+                <div style="padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-color);">
+                  <dt class="mono-font" style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.25rem;">Languages</dt>
+                  <dd style="color: var(--text-primary);">German (C1), English (Fluent)</dd>
+                </div>
+                <div>
+                  <dt class="mono-font" style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.25rem;">Focus</dt>
+                  <dd style="color: var(--text-primary);">Infrastructure Automation, Reliability, Documentation</dd>
+                </div>
+              </dl>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section class="section" id="skills" aria-labelledby="skills-title" style="background: var(--bg-alt);">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow mono-font"><i class="fa-solid fa-cogs" aria-hidden="true"></i> Skills</span>
+          <h2 class="display-font" id="skills-title">Technical Stack</h2>
         </div>
 
         <div class="feature-grid">
-          <article class="card reveal" style="--delay: 60ms;">
-            <div class="card-icon"><i class="fa-solid fa-code-branch"></i></div>
-            <h3>CI/CD Engineering</h3>
-            <p>
-              Build release pipelines that validate faster, reduce manual steps, and make promotion across environments more repeatable and auditable.
-            </p>
+          <article class="feature-card reveal" style="--delay: 100ms;">
+            <div class="feature-icon"><i class="fa-solid fa-server" aria-hidden="true"></i></div>
+            <h3>Infrastructure</h3>
+            <p>Linux/Windows Server administration, VMware/Hyper-V virtualization, bare-metal provisioning, rack &amp; stack, hardware lifecycle management.</p>
           </article>
-
-          <article class="card reveal" style="--delay: 140ms;">
-            <div class="card-icon"><i class="fa-solid fa-cubes-stacked"></i></div>
-            <h3>Container Platforms</h3>
-            <p>
-              Structure workloads for Docker and orchestration environments with attention to deployment consistency, runtime behavior, and scaling patterns.
-            </p>
+          <article class="feature-card reveal" style="--delay: 150ms;">
+            <div class="feature-icon"><i class="fa-solid fa-cloud" aria-hidden="true"></i></div>
+            <h3>Cloud Platforms</h3>
+            <p>AWS (EC2, RDS, S3, IAM, CloudFormation), Azure (VMs, AKS, DevOps), GCP fundamentals. Multi-cloud strategy &amp; cost optimization.</p>
           </article>
-
-          <article class="card reveal" style="--delay: 220ms;">
-            <div class="card-icon"><i class="fa-solid fa-eye"></i></div>
+          <article class="feature-card reveal" style="--delay: 200ms;">
+            <div class="feature-icon"><i class="fa-solid fa-code-branch" aria-hidden="true"></i></div>
+            <h3>CI/CD &amp; Automation</h3>
+            <p>GitLab CI, GitHub Actions, Jenkins pipelines. Automated testing, deployment strategies (blue-green, canary), artifact management.</p>
+          </article>
+          <article class="feature-card reveal" style="--delay: 250ms;">
+            <div class="feature-icon"><i class="fa-solid fa-boxes-stacked" aria-hidden="true"></i></div>
+            <h3>Containers &amp; Orchestration</h3>
+            <p>Docker, Docker Compose, Kubernetes (AKS, EKS, self-managed). Helm charts, Kustomize, operator pattern, service mesh basics.</p>
+          </article>
+          <article class="feature-card reveal" style="--delay: 300ms;">
+            <div class="feature-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div>
             <h3>Observability</h3>
-            <p>
-              Improve system confidence with meaningful telemetry, practical dashboards, and alerts tuned to service health instead of noise.
-            </p>
+            <p>Prometheus, Grafana, Loki, Alertmanager, Zabbix, Datadog. SLI/SLO definition, alerting strategies, dashboard design, log aggregation.</p>
+          </article>
+          <article class="feature-card reveal" style="--delay: 350ms;">
+            <div class="feature-icon"><i class="fa-solid fa-database" aria-hidden="true"></i></div>
+            <h3>Databases &amp; Storage</h3>
+            <p>PostgreSQL, MySQL, MSSQL administration. Backup/recovery, replication, performance tuning, migration strategies, Redis caching.</p>
+          </article>
+          <article class="feature-card reveal" style="--delay: 400ms;">
+            <div class="feature-icon"><i class="fa-solid fa-terminal" aria-hidden="true"></i></div>
+            <h3>Scripting &amp; IaC</h3>
+            <p>Bash, PowerShell, Python for automation. Terraform, Ansible for infrastructure as code. GitOps workflows with ArgoCD/Flux.</p>
+          </article>
+          <article class="feature-card reveal" style="--delay: 450ms;">
+            <div class="feature-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+            <h3>Security &amp; Compliance</h3>
+            <p>Network segmentation, VPN/Zero Trust, secrets management (Vault, Sealed Secrets), vulnerability scanning, CIS benchmarks, audit readiness.</p>
+          </article>
+          <article class="feature-card reveal" style="--delay: 500ms;">
+            <div class="feature-icon"><i class="fa-solid fa-book" aria-hidden="true"></i></div>
+            <h3>Documentation &amp; Process</h3>
+            <p>Runbooks, playbooks, architecture decision records (ADRs), incident postmortems, onboarding guides, Confluence/GitBook maintenance.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="about" aria-labelledby="about-title">
-      <div class="container about-grid">
-        <div class="card reveal">
-          <span class="eyebrow"><i class="fa-solid fa-user-gear"></i> About</span>
-          <h2 id="about-title">A professional portfolio for software infrastructure and DevOps-oriented delivery.</h2>
-          <p>
-            This single-page site is structured to present infrastructure engineering with a calm, credible tone. It emphasizes platform thinking, delivery discipline, and the practical outcomes of automation across build, release, and runtime operations.
-          </p>
-          <p>
-            The visual system combines ocean blue highlights with deep navy surfaces, creating a clean modern interface while preserving readability, contrast, and strong visual hierarchy.
-          </p>
-          <ul class="pill-list" aria-label="Technology focus areas">
-            <li>Cloud Foundations</li>
-            <li>Release Automation</li>
-            <li>Security Posture</li>
-            <li>Platform Reliability</li>
-            <li>Developer Enablement</li>
-          </ul>
-        </div>
-
-        <aside class="card reveal" style="--delay: 140ms;" aria-label="Highlights">
-          <h3>Operating principles</h3>
-          <div class="metric-list">
-            <div class="metric">
-              <strong>Automate</strong>
-              <span>Reduce repetitive operational work and remove hidden manual dependencies.</span>
-            </div>
-            <div class="metric">
-              <strong>Observe</strong>
-              <span>Make behavior visible through logs, metrics, traces, and incident-ready dashboards.</span>
-            </div>
-            <div class="metric">
-              <strong>Secure</strong>
-              <span>Apply least privilege, policy checks, and safer defaults during delivery.</span>
-            </div>
-            <div class="metric">
-              <strong>Scale</strong>
-              <span>Design systems that remain understandable as environments and teams grow.</span>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
+    <!-- PROJECTS SECTION -->
     <section class="section" id="projects" aria-labelledby="projects-title">
       <div class="container">
         <div class="section-header reveal">
-          <span class="eyebrow"><i class="fa-solid fa-diagram-project"></i> Projects</span>
-          <h2 id="projects-title">Selected work presented in a masonry layout for varied project depth.</h2>
-          <p>
-            Each card highlights a different type of infrastructure problem, from release orchestration to observability design and environment consistency across teams.
-          </p>
+          <span class="eyebrow mono-font"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> Projects</span>
+          <h2 class="display-font" id="projects-title">Selected Work</h2>
         </div>
 
         <div class="masonry">
-          <article class="masonry-item card project-card reveal">
+          <article class="masonry-item project-card reveal" style="--delay: 100ms;">
             <div class="project-thumb">
-              <img src="https://picsum.photos/id/20/900/700" alt="Blue dashboard showing deployment metrics" />
+              <img src="https://picsum.photos/id/1015/800/600" alt="CI/CD Pipeline Architecture Diagram" loading="lazy" />
+              <span class="tag mono-font">Pipeline</span>
             </div>
             <div class="project-body">
-              <div class="project-topline">
-                <span class="project-tag">Delivery</span>
-                <i class="fa-solid fa-arrow-trend-up" aria-hidden="true"></i>
-              </div>
-              <h3>Pipeline Modernization Initiative</h3>
-              <p>
-                Reworked fragmented release steps into a unified delivery process with environment-aware stages, clearer approvals, and deployment visibility for stakeholders.
-              </p>
-              <ul class="pill-list">
-                <li>Build Validation</li>
-                <li>Artifact Promotion</li>
-                <li>Release Gates</li>
-              </ul>
+              <h3>Multi-Environment CI/CD Platform</h3>
+              <p>Designed and implemented a unified GitLab CI/CD platform supporting dev, staging, and production deployments with automated testing, security scanning, and approval gates.</p>
               <div class="project-links">
-                <a href="#contact" class="text-link"><i class="fa-solid fa-link"></i>Project details</a>
+                <a href="#contact"><i class="fa-solid fa-code" aria-hidden="true"></i> View Code</a>
+                <a href="#contact"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Case Study</a>
               </div>
             </div>
           </article>
 
-          <article class="masonry-item card project-card reveal" style="--delay: 80ms;">
+          <article class="masonry-item project-card reveal" style="--delay: 150ms;">
             <div class="project-thumb">
-              <img src="https://picsum.photos/id/48/900/1100" alt="Container infrastructure visual representing orchestration" />
+              <img src="https://picsum.photos/id/1048/800/900" alt="Kubernetes Cluster Architecture" loading="lazy" />
+              <span class="tag mono-font">Kubernetes</span>
             </div>
             <div class="project-body">
-              <div class="project-topline">
-                <span class="project-tag">Containers</span>
-                <i class="fa-solid fa-cubes" aria-hidden="true"></i>
-              </div>
-              <h3>Service Platform Baseline</h3>
-              <p>
-                Created a reusable application runtime baseline for containerized services with documented conventions for configuration, health checks, secrets handling, and rollout behavior.
-              </p>
+              <h3>AKS Cluster Standardization</h3>
+              <p>Built a reproducible Azure Kubernetes Service baseline with GitOps (Flux), policy enforcement (Gatekeeper), and workload identity for 15+ microservices.</p>
               <div class="project-links">
-                <a href="#gallery" class="text-link"><i class="fa-solid fa-image"></i>View visuals</a>
+                <a href="#contact"><i class="fa-solid fa-code" aria-hidden="true"></i> View Code</a>
               </div>
             </div>
           </article>
 
-          <article class="masonry-item card project-card reveal" style="--delay: 140ms;">
+          <article class="masonry-item project-card reveal" style="--delay: 200ms;">
             <div class="project-thumb">
-              <img src="https://picsum.photos/id/96/900/800" alt="Monitoring charts displayed on a large screen" />
+              <img src="https://picsum.photos/id/1033/800/700" alt="Monitoring Dashboard" loading="lazy" />
+              <span class="tag mono-font">Observability</span>
             </div>
             <div class="project-body">
-              <div class="project-topline">
-                <span class="project-tag">Observability</span>
-                <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
-              </div>
-              <h3>Operational Visibility Layer</h3>
-              <p>
-                Defined a monitoring approach that turns raw operational data into actionable signals, making issue detection faster and escalation paths more precise.
-              </p>
-              <ul class="pill-list">
-                <li>Logs</li>
-                <li>Metrics</li>
-                <li>Alert Strategy</li>
-                <li>Service Health</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="masonry-item card project-card reveal" style="--delay: 200ms;">
-            <div class="project-thumb">
-              <img src="https://picsum.photos/id/1050/900/680" alt="Secure server room representing governance and control" />
-            </div>
-            <div class="project-body">
-              <div class="project-topline">
-                <span class="project-tag">Governance</span>
-                <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
-              </div>
-              <h3>Environment Governance Playbook</h3>
-              <p>
-                Documented operational guardrails for access control, naming standards, lifecycle handling, and deployment responsibilities to improve consistency across teams.
-              </p>
-            </div>
-          </article>
-
-          <article class="masonry-item card project-card reveal" style="--delay: 260ms;">
-            <div class="project-thumb">
-              <img src="https://picsum.photos/id/77/900/980" alt="Laptop workspace with code editor and terminal" />
-            </div>
-            <div class="project-body">
-              <div class="project-topline">
-                <span class="project-tag">Developer Experience</span>
-                <i class="fa-solid fa-terminal" aria-hidden="true"></i>
-              </div>
-              <h3>Onboarding and Tooling Starter Kit</h3>
-              <p>
-                Standardized local setup, repository conventions, and delivery entry points so engineers could move from clone to validated build with less setup time.
-              </p>
+              <h3>Unified Observability Stack</h3>
+              <p>Deployed Prometheus/Grafana/Loki stack with custom dashboards, SLO-based alerting, and distributed tracing via Tempo. Reduced MTTR by 40%.</p>
               <div class="project-links">
-                <a href="#contact" class="text-link"><i class="fa-solid fa-paper-plane"></i>Request overview</a>
+                <a href="#contact"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Case Study</a>
               </div>
             </div>
           </article>
 
-          <article class="masonry-item card project-card reveal" style="--delay: 320ms;">
+          <article class="masonry-item project-card reveal" style="--delay: 250ms;">
             <div class="project-thumb">
-              <img src="https://picsum.photos/id/60/900/760" alt="Network operations screen in a dark environment" />
+              <img src="https://picsum.photos/id/1050/800/650" alt="Infrastructure as Code" loading="lazy" />
+              <span class="tag mono-font">Terraform</span>
             </div>
             <div class="project-body">
-              <div class="project-topline">
-                <span class="project-tag">Reliability</span>
-                <i class="fa-solid fa-server"></i>
+              <h3>Infrastructure as Code Migration</h3>
+              <p>Migrated 200+ manual AWS resources to Terraform with modular structure, remote state, and automated plan/apply via GitHub Actions.</p>
+              <div class="project-links">
+                <a href="#contact"><i class="fa-solid fa-code" aria-hidden="true"></i> View Code</a>
               </div>
-              <h3>Resilience Review Framework</h3>
-              <p>
-                Introduced service review checkpoints that examine recovery assumptions, dependency behavior, change risk, and operational readiness before major rollouts.
-              </p>
-              <ul class="pill-list">
-                <li>Runbooks</li>
-                <li>Rollback Paths</li>
-                <li>Failure Modes</li>
-              </ul>
+            </div>
+          </article>
+
+          <article class="masonry-item project-card reveal" style="--delay: 300ms;">
+            <div class="project-thumb">
+              <img src="https://picsum.photos/id/1060/800/750" alt="Database Migration" loading="lazy" />
+              <span class="tag mono-font">Database</span>
+            </div>
+            <div class="project-body">
+              <h3>Zero-Downtime DB Migration</h3>
+              <p>Orchestrated PostgreSQL major version upgrade with pg_logical replication, achieving zero-downtime cutover for 2TB production database.</p>
+              <div class="project-links">
+                <a href="#contact"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Case Study</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="masonry-item project-card reveal" style="--delay: 350ms;">
+            <div class="project-thumb">
+              <img src="https://picsum.photos/id/1074/800/800" alt="Automation Scripts" loading="lazy" />
+              <span class="tag mono-font">Automation</span>
+            </div>
+            <div class="project-body">
+              <h3>Operational Automation Framework</h3>
+              <p>Developed Python/Ansible framework for routine operations: patching, backup verification, certificate rotation, and compliance reporting.</p>
+              <div class="project-links">
+                <a href="#contact"><i class="fa-solid fa-code" aria-hidden="true"></i> View Code</a>
+              </div>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="experience" aria-labelledby="experience-title">
-      <div class="container grid-two">
-        <div class="reveal">
-          <div class="section-header">
-            <span class="eyebrow"><i class="fa-solid fa-briefcase"></i> Experience</span>
-            <h2 id="experience-title">Practical infrastructure experience with delivery, environments, and operational quality.</h2>
-            <p>
-              This section uses a concise timeline format to show the progression from implementation to platform improvement and operational maturity.
-            </p>
-          </div>
-
-          <div class="timeline">
-            <article class="timeline-item">
-              <div class="timeline-meta">2025 — Present</div>
-              <h3>Software Infrastructure Engineer</h3>
-              <p>
-                Leading work around delivery pipelines, deployment consistency, and service readiness with a focus on reducing friction between code completion and dependable release.
-              </p>
-            </article>
-
-            <article class="timeline-item">
-              <div class="timeline-meta">2023 — 2025</div>
-              <h3>Platform and Automation Contributor</h3>
-              <p>
-                Supported automation improvements, environment standardization, and troubleshooting practices that strengthened everyday reliability for development teams.
-              </p>
-            </article>
-
-            <article class="timeline-item">
-              <div class="timeline-meta">2021 — 2023</div>
-              <h3>Systems and Tooling Foundations</h3>
-              <p>
-                Built practical understanding across operating systems, scripting, application support, and technical workflows that now inform infrastructure decisions.
-              </p>
-            </article>
-          </div>
+    <!-- EXPERIENCE SECTION -->
+    <section class="section" id="experience" aria-labelledby="experience-title" style="background: var(--bg-alt);">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow mono-font"><i class="fa-solid fa-history" aria-hidden="true"></i> Experience</span>
+          <h2 class="display-font" id="experience-title">Career Timeline</h2>
         </div>
 
-        <aside class="card reveal" style="--delay: 120ms;">
-          <h3>Core stack emphasis</h3>
-          <p>
-            The stack is intentionally described at the capability level so the portfolio remains adaptable while still conveying a strong infrastructure identity.
-          </p>
-          <ul class="pill-list" aria-label="Core stack emphasis">
-            <li>HTML5 / CSS3 / JavaScript</li>
-            <li>Automation Mindset</li>
-            <li>Cloud Delivery</li>
-            <li>Service Monitoring</li>
-            <li>Security Review</li>
-            <li>Environment Standards</li>
-            <li>Release Confidence</li>
-            <li>Operational Documentation</li>
-          </ul>
-        </aside>
+        <div class="grid-two">
+          <div class="reveal" style="--delay: 100ms;">
+            <div class="timeline">
+              <article class="timeline-item">
+                <span class="timeline-meta mono-font">2023 – Present</span>
+                <h3>Senior Infrastructure Engineer</h3>
+                <p>Leading cloud migration initiatives, implementing GitOps workflows, and building observability platforms for a 200+ person engineering organization. Managed AWS/Azure hybrid infrastructure serving 50+ microservices.</p>
+              </article>
+              <article class="timeline-item">
+                <span class="timeline-meta mono-font">2021 – 2023</span>
+                <h3>Systems Engineer</h3>
+                <p>Administered Linux/Windows server fleet (200+ nodes), automated patching and compliance with Ansible, managed VMware vSphere clusters, and implemented centralized logging with ELK stack.</p>
+              </article>
+              <article class="timeline-item">
+                <span class="timeline-meta mono-font">2019 – 2021</span>
+                <h3>IT Infrastructure Specialist</h3>
+                <p>Supported hybrid infrastructure across on-premises and AWS. Built CI/CD pipelines with Jenkins, administered PostgreSQL/MSSQL databases, and developed monitoring solutions with Zabbix/Grafana.</p>
+              </article>
+              <article class="timeline-item">
+                <span class="timeline-meta mono-font">2018 – 2019</span>
+                <h3>Junior Systems Administrator</h3>
+                <p>Entry-level role managing user access, server monitoring, backup verification, and documentation. Gained foundational experience in Linux, Windows Server, and ITIL service management.</p>
+              </article>
+            </div>
+          </div>
+
+          <aside class="reveal" style="--delay: 200ms;">
+            <div class="feature-card" style="height: 100%;">
+              <h3 class="display-font" style="font-size: 1.5rem; margin-bottom: 1.5rem;">Role Objective</h3>
+              <p style="margin-bottom: 1.5rem;">Seeking a <strong>working student position (Werkstudent)</strong> in DevOps / Platform Engineering / Infrastructure where I can contribute production-grade skills while continuing my Master's studies at Hochschule Wismar.</p>
+
+              <h4 class="mono-font" style="font-size: 0.875rem; margin-bottom: 1rem; color: var(--text-primary);">What I Bring</h4>
+              <ul style="display: grid; gap: 0.75rem;">
+                <li style="padding-left: 1.5rem; position: relative; font-size: 0.9375rem;">
+                  <span style="position: absolute; left: 0; color: var(--color-primary);">▸</span>
+                  5+ years production infrastructure experience
+                </li>
+                <li style="padding-left: 1.5rem; position: relative; font-size: 0.9375rem;">
+                  <span style="position: absolute; left: 0; color: var(--color-primary);">▸</span>
+                  Strong automation mindset (Ansible, Terraform, Python)
+                </li>
+                <li style="padding-left: 1.5rem; position: relative; font-size: 0.9375rem;">
+                  <span style="position: absolute; left: 0; color: var(--color-primary);">▸</span>
+                  Cloud-native expertise (Kubernetes, AWS, Azure)
+                </li>
+                <li style="padding-left: 1.5rem; position: relative; font-size: 0.9375rem;">
+                  <span style="position: absolute; left: 0; color: var(--color-primary);">▸</span>
+                  Observability &amp; reliability engineering focus
+                </li>
+                <li style="padding-left: 1.5rem; position: relative; font-size: 0.9375rem;">
+                  <span style="position: absolute; left: 0; color: var(--color-primary);">▸</span>
+                  Documentation-first approach
+                </li>
+                <li style="padding-left: 1.5rem; position: relative; font-size: 0.9375rem;">
+                  <span style="position: absolute; left: 0; color: var(--color-primary);">▸</span>
+                  German C1 / English fluent — ready for German workplace
+                </li>
+              </ul>
+
+              <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
+                <a href="#contact" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                  <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Let's Talk
+                </a>
+              </div>
+            </div>
+          </aside>
+        </div>
       </div>
     </section>
 
+    <!-- GALLERY SECTION -->
     <section class="section" id="gallery" aria-labelledby="gallery-title">
       <div class="container">
         <div class="section-header reveal">
-          <span class="eyebrow"><i class="fa-solid fa-images"></i> Gallery</span>
-          <h2 id="gallery-title">Visual snapshots of infrastructure themes, environments, and delivery contexts.</h2>
-          <p>
-            The gallery opens in a keyboard-accessible lightbox so larger visuals can be explored without leaving the page.
-          </p>
+          <span class="eyebrow mono-font"><i class="fa-solid fa-photo-film" aria-hidden="true"></i> Gallery</span>
+          <h2 class="display-font" id="gallery-title">Visual Highlights</h2>
         </div>
 
         <div class="gallery-grid">
-          <button class="gallery-item reveal" style="--delay: 40ms;" data-lightbox-src="https://picsum.photos/id/1011/1400/1000" data-lightbox-caption="Cloud-first deployment environment">
-            <img src="https://picsum.photos/id/1011/700/700" alt="Cloud infrastructure visual with soft blue tones" />
-            <span class="gallery-overlay">Cloud deployment</span>
+          <button class="gallery-item reveal" style="--delay: 100ms;" data-lightbox-src="https://picsum.photos/id/1015/1200/1200" data-lightbox-caption="CI/CD Pipeline Architecture" aria-label="View CI/CD Pipeline Architecture full size">
+            <img src="https://picsum.photos/id/1015/600/600" alt="CI/CD Pipeline Architecture thumbnail" loading="lazy" />
+            <div class="gallery-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> CI/CD Architecture</div>
           </button>
 
-          <button class="gallery-item reveal" style="--delay: 100ms;" data-lightbox-src="https://picsum.photos/id/1033/1400/1000" data-lightbox-caption="Team workstation for release engineering">
-            <img src="https://picsum.photos/id/1033/700/700" alt="Developer workstation with multiple screens" />
-            <span class="gallery-overlay">Release engineering</span>
+          <button class="gallery-item reveal" style="--delay: 150ms;" data-lightbox-src="https://picsum.photos/id/1048/1200/1200" data-lightbox-caption="Kubernetes Cluster Topology" aria-label="View Kubernetes Cluster Topology full size">
+            <img src="https://picsum.photos/id/1048/600/600" alt="Kubernetes Cluster Topology thumbnail" loading="lazy" />
+            <div class="gallery-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> K8s Topology</div>
           </button>
 
-          <button class="gallery-item reveal" style="--delay: 160ms;" data-lightbox-src="https://picsum.photos/id/1041/1400/1000" data-lightbox-caption="Monitoring and observability setup">
-            <img src="https://picsum.photos/id/1041/700/700" alt="Monitoring interface and system dashboards" />
-            <span class="gallery-overlay">Observability</span>
+          <button class="gallery-item reveal" style="--delay: 200ms;" data-lightbox-src="https://picsum.photos/id/1033/1200/1200" data-lightbox-caption="Grafana Dashboard Overview" aria-label="View Grafana Dashboard Overview full size">
+            <img src="https://picsum.photos/id/1033/600/600" alt="Grafana Dashboard Overview thumbnail" loading="lazy" />
+            <div class="gallery-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Monitoring</div>
           </button>
 
-          <button class="gallery-item reveal" style="--delay: 220ms;" data-lightbox-src="https://picsum.photos/id/1060/1400/1000" data-lightbox-caption="Secure operations environment">
-            <img src="https://picsum.photos/id/1060/700/700" alt="Data center and controlled infrastructure environment" />
-            <span class="gallery-overlay">Secure operations</span>
+          <button class="gallery-item reveal" style="--delay: 250ms;" data-lightbox-src="https://picsum.photos/id/1050/1200/1200" data-lightbox-caption="Terraform Module Structure" aria-label="View Terraform Module Structure full size">
+            <img src="https://picsum.photos/id/1050/600/600" alt="Terraform Module Structure thumbnail" loading="lazy" />
+            <div class="gallery-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> IaC Structure</div>
+          </button>
+
+          <button class="gallery-item reveal" style="--delay: 300ms;" data-lightbox-src="https://picsum.photos/id/1060/1200/1200" data-lightbox-caption="Database Replication Setup" aria-label="View Database Replication Setup full size">
+            <img src="https://picsum.photos/id/1060/600/600" alt="Database Replication Setup thumbnail" loading="lazy" />
+            <div class="gallery-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> DB Replication</div>
+          </button>
+
+          <button class="gallery-item reveal" style="--delay: 350ms;" data-lightbox-src="https://picsum.photos/id/1074/1200/1200" data-lightbox-caption="Automation Runbook Example" aria-label="View Automation Runbook Example full size">
+            <img src="https://picsum.photos/id/1074/600/600" alt="Automation Runbook Example thumbnail" loading="lazy" />
+            <div class="gallery-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Runbook Sample</div>
+          </button>
+
+          <button class="gallery-item reveal" style="--delay: 400ms;" data-lightbox-src="https://picsum.photos/id/1080/1200/1200" data-lightbox-caption="Network Architecture Diagram" aria-label="View Network Architecture Diagram full size">
+            <img src="https://picsum.photos/id/1080/600/600" alt="Network Architecture Diagram thumbnail" loading="lazy" />
+            <div class="gallery-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Network Design</div>
+          </button>
+
+          <button class="gallery-item reveal" style="--delay: 450ms;" data-lightbox-src="https://picsum.photos/id/1084/1200/1200" data-lightbox-caption="Incident Response Flow" aria-label="View Incident Response Flow full size">
+            <img src="https://picsum.photos/id/1084/600/600" alt="Incident Response Flow thumbnail" loading="lazy" />
+            <div class="gallery-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Incident Flow</div>
           </button>
         </div>
       </div>
     </section>
 
+    <!-- TESTIMONIALS SECTION -->
+    <section class="section" id="testimonials" aria-labelledby="testimonials-title" style="background: var(--bg-alt);">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow mono-font"><i class="fa-solid fa-comments" aria-hidden="true"></i> Testimonials</span>
+          <h2 class="display-font" id="testimonials-title">References</h2>
+        </div>
+
+        <div class="testimonial-shell reveal">
+          <div class="testimonial-track" id="testimonialTrack" role="list" aria-label="Testimonials">
+            <div class="testimonial-slide" role="listitem">
+              <article class="testimonial-card">
+                <blockquote>"Himanshu's ability to translate complex infrastructure challenges into clean, automated solutions is exceptional. He brought structure to our chaotic deployment process and reduced release times by 60%."</blockquote>
+                <div class="testimonial-meta"><strong>Thomas Mueller</strong> — Engineering Lead, Cloud Platform</div>
+              </article>
+            </div>
+            <div class="testimonial-slide" role="listitem">
+              <article class="testimonial-card">
+                <blockquote>"Reliable, thorough, and proactive. Himanshu took ownership of our monitoring overhaul and delivered a solution that actually helps us sleep at night. His documentation is the gold standard."</blockquote>
+                <div class="testimonial-meta"><strong>Sarah Weber</strong> — Senior SRE, Platform Team</div>
+              </article>
+            </div>
+            <div class="testimonial-slide" role="listitem">
+              <article class="testimonial-card">
+                <blockquote>"Rare combination of deep technical skill and communication clarity. Whether it's a 3AM incident or a stakeholder presentation, Himanshu delivers with the same level of professionalism."</blockquote>
+                <div class="testimonial-meta"><strong>Dr. Klaus Fischer</strong> — CTO, TechStart GmbH</div>
+              </article>
+            </div>
+          </div>
+
+          <div class="testimonial-controls" aria-label="Testimonial navigation">
+            <button class="testimonial-btn" id="testimonialPrev" aria-label="Previous testimonial" type="button"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+            <button class="testimonial-btn" id="testimonialNext" aria-label="Next testimonial" type="button"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
     <section class="section" id="contact" aria-labelledby="contact-title">
-      <div class="container contact-grid">
-        <div class="card reveal">
-          <span class="eyebrow"><i class="fa-solid fa-paper-plane"></i> Contact</span>
-          <h2 id="contact-title">Discuss infrastructure, automation, and production-ready delivery workflows.</h2>
-          <p>
-            Use this section to invite collaboration around platform engineering, operational reliability, or DevOps modernization work. The layout keeps contact details visible while leaving room for a practical message form.
-          </p>
-
-          <div class="contact-list">
-            <div class="contact-item">
-              <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
-              <div>
-                <h3>Email</h3>
-                <p>hello@softwareinfrastructure.dev</p>
-              </div>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
-              <div>
-                <h3>Location</h3>
-                <p>Available for remote collaboration and engineering partnerships.</p>
-              </div>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-icon"><i class="fa-solid fa-clock"></i></div>
-              <div>
-                <h3>Response Window</h3>
-                <p>Typically within one business day for project or consulting inquiries.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="social-row" aria-label="Social media links">
-            <a class="social-link" href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <i class="fa-brands fa-github"></i>
-            </a>
-            <a class="social-link" href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <i class="fa-brands fa-linkedin-in"></i>
-            </a>
-            <a class="social-link" href="https://x.com/" target="_blank" rel="noopener noreferrer" aria-label="X">
-              <i class="fa-brands fa-x-twitter"></i>
-            </a>
-            <a class="social-link" href="https://youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-              <i class="fa-brands fa-youtube"></i>
-            </a>
-          </div>
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow mono-font"><i class="fa-solid fa-mail" aria-hidden="true"></i> Contact</span>
+          <h2 class="display-font" id="contact-title">Get In Touch</h2>
         </div>
 
-        <div class="card reveal" style="--delay: 140ms;">
-          <h3>Send a message</h3>
-          <form class="form-grid" action="#" method="post" novalidate>
-            <div class="field-group">
-              <label for="name">Name</label>
-              <input id="name" name="name" type="text" placeholder="Your full name" autocomplete="name" />
+        <div class="contact-grid">
+          <div class="reveal" style="--delay: 100ms;">
+            <p class="lead">Open to working student opportunities, freelance infrastructure projects, and technical collaborations.</p>
+
+            <div class="contact-info">
+              <div class="contact-item">
+                <div class="contact-icon"><i class="fa-solid fa-envelope" aria-hidden="true"></i></div>
+                <div>
+                  <h4>Email</h4>
+                  <p><a href="mailto:himanshu.devops@example.com" style="color: var(--color-primary);">himanshu.devops@example.com</a></p>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></div>
+                <div>
+                  <h4>Location</h4>
+                  <p>Wismar, Mecklenburg-Vorpommern, Germany</p>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon"><i class="fa-solid fa-clock" aria-hidden="true"></i></div>
+                <div>
+                  <h4>Availability</h4>
+                  <p>Working Student (20 hrs/week) — Hybrid/Remote</p>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon"><i class="fa-solid fa-link" aria-hidden="true"></i></div>
+                <div>
+                  <h4>Profiles</h4>
+                  <p>
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); margin-right: 1rem;">GitHub</a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary);">LinkedIn</a>
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <div class="field-group">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" placeholder="name@example.com" autocomplete="email" />
+            <div class="social-links" role="list" aria-label="Social media links">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub" role="listitem"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn" role="listitem"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+              <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="X (Twitter)" role="listitem"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a>
+              <a href="mailto:himanshu.devops@example.com" class="social-link" aria-label="Email" role="listitem"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
             </div>
+          </div>
 
-            <div class="field-group">
-              <label for="subject">Project focus</label>
-              <input id="subject" name="subject" type="text" placeholder="CI/CD, platform engineering, cloud operations" />
-            </div>
+          <div class="reveal" style="--delay: 200ms;">
+            <form id="contactForm" class="feature-card" novalidate>
+              <h3 class="display-font" style="font-size: 1.5rem; margin-bottom: 1.5rem;">Send a Message</h3>
 
-            <div class="field-group">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" placeholder="Share a brief overview of your infrastructure goals, delivery challenges, or environment requirements."></textarea>
-            </div>
+              <div class="form-field">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required autocomplete="name" aria-describedby="nameError" />
+                <span id="nameError" class="field-error" aria-live="polite">Please enter your name (minimum 2 characters)</span>
+              </div>
 
-            <button class="btn btn-primary" type="submit">
-              <i class="fa-solid fa-paper-plane"></i>
-              Send inquiry
-            </button>
-          </form>
+              <div class="form-field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email" aria-describedby="emailError" />
+                <span id="emailError" class="field-error" aria-live="polite">Please enter a valid email address</span>
+              </div>
+
+              <div class="form-field">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" placeholder="Working Student Application / Project Inquiry / Collaboration" required aria-describedby="subjectError" />
+                <span id="subjectError" class="field-error" aria-live="polite">Please enter a subject (minimum 5 characters)</span>
+              </div>
+
+              <div class="form-field">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Tell me about the role, project, or opportunity..." required aria-describedby="messageError"></textarea>
+                <span id="messageError" class="field-error" aria-live="polite">Please enter a message (minimum 20 characters)</span>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 0.5rem;">
+                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Send Message
+              </button>
+
+              <div id="formStatus" class="form-status" aria-live="polite"></div>
+            </form>
+          </div>
         </div>
       </div>
     </section>
+
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-row">
-      <div>&copy; <span id="year"></span> Software Infrastructure. All rights reserved.</div>
-      <div class="footer-inline">
-        <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://x.com/" target="_blank" rel="noopener noreferrer">X</a>
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-row">
+        <div>&copy; <span id="year"></span> Himanshu. All rights reserved.</div>
+        <div class="footer-inline">
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="mailto:himanshu.devops@example.com">Email</a>
+          <a href="#home">Top</a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+  <!-- =========================================================
+       BACK TO TOP
+       ========================================================= -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top" type="button">
     <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
   </button>
 
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <div
-      class="lightbox-dialog"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="lightboxCaption"
-    >
-      <button class="lightbox-btn lightbox-close" id="lightboxClose" aria-label="Close image viewer">
-        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-      </button>
-
-      <div class="lightbox-nav" aria-hidden="false">
-        <button class="lightbox-btn" id="lightboxPrev" aria-label="Previous image">
-          <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
-        </button>
-        <button class="lightbox-btn" id="lightboxNext" aria-label="Next image">
-          <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-        </button>
-      </div>
-
+  <!-- =========================================================
+       LIGHTBOX
+       ========================================================= -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="lightboxCaption">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox" type="button"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    <button class="lightbox-nav-btn lightbox-prev" id="lightboxPrev" aria-label="Previous image" type="button"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+    <button class="lightbox-nav-btn lightbox-next" id="lightboxNext" aria-label="Next image" type="button"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+    <div class="lightbox-dialog">
       <img id="lightboxImage" src="" alt="" />
       <div class="lightbox-caption">
-        <div id="lightboxCaption">Image preview</div>
-        <div>Use arrow keys to navigate, Esc to close.</div>
+        <span id="lightboxCaption"></span>
+        <span class="mono-font" style="font-size: 0.625rem;">← → navigate · Esc close</span>
       </div>
     </div>
   </div>
 
+  <!-- =========================================================
+       JAVASCRIPT
+       ========================================================= -->
   <script>
-    /*
-      =========================================================
-      JavaScript for interaction
-      Features:
-      - Responsive navigation toggle
-      - Smooth section-aware active nav state
-      - Accessible hero carousel with auto-play pause/play
-      - Scroll-triggered reveal animations
-      - Back-to-top button
-      - Keyboard-friendly lightbox gallery
-      - Dynamic year in footer
-      =========================================================
-    */
+    (function() {
+      'use strict';
 
-    // -----------------------------
-    // Helper selectors
-    // -----------------------------
-    const $ = (selector, scope = document) => scope.querySelector(selector);
-    const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
+      // ============================================================
+      // Utility Functions
+      // ============================================================
+      const $ = (sel, ctx = document) => ctx.querySelector(sel);
+      const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
+      const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // -----------------------------
-    // Mobile navigation
-    // -----------------------------
-    const navToggle = $("#navToggle");
-    const primaryNav = $("#primaryNav");
-    const navLinks = $$(".nav-link");
+      // ============================================================
+      // Theme Toggle with localStorage persistence
+      // ============================================================
+      const root = document.documentElement;
+      const themeToggle = $('#themeToggle');
+      const savedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
 
-    if (navToggle && primaryNav) {
-      navToggle.addEventListener("click", () => {
-        const isOpen = primaryNav.classList.toggle("open");
-        navToggle.setAttribute("aria-expanded", String(isOpen));
-        navToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
-        navToggle.innerHTML = isOpen
-          ? '<i class="fa-solid fa-xmark" aria-hidden="true"></i><span>Close</span>'
-          : '<i class="fa-solid fa-bars" aria-hidden="true"></i><span>Menu</span>';
-      });
-
-      navLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-          if (window.innerWidth <= 840 && primaryNav.classList.contains("open")) {
-            primaryNav.classList.remove("open");
-            navToggle.setAttribute("aria-expanded", "false");
-            navToggle.setAttribute("aria-label", "Open navigation menu");
-            navToggle.innerHTML = '<i class="fa-solid fa-bars" aria-hidden="true"></i><span>Menu</span>';
-          }
-        });
-      });
-    }
-
-    // -----------------------------
-    // Active navigation state
-    // -----------------------------
-    const sections = $$("main section[id]");
-    const navMap = new Map(
-      navLinks.map((link) => [link.getAttribute("href").slice(1), link])
-    );
-
-    const sectionObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const id = entry.target.id;
-          const navLink = navMap.get(id);
-          if (entry.isIntersecting && navLink) {
-            navLinks.forEach((link) => link.classList.remove("active"));
-            navLink.classList.add("active");
-          }
-        });
-      },
-      {
-        rootMargin: "-35% 0px -50% 0px",
-        threshold: 0.1
+      function applyTheme(theme) {
+        root.setAttribute('data-theme', theme);
+        const isDark = theme === 'dark';
+        themeToggle.setAttribute('aria-pressed', String(isDark));
+        themeToggle.innerHTML = isDark
+          ? '<i class="fa-solid fa-sun" aria-hidden="true"></i><span class="mono-font">Theme</span>'
+          : '<i class="fa-solid fa-moon" aria-hidden="true"></i><span class="mono-font">Theme</span>';
       }
-    );
 
-    sections.forEach((section) => sectionObserver.observe(section));
+      applyTheme(initialTheme);
 
-    // -----------------------------
-    // Reveal on scroll with stagger support
-    // -----------------------------
-    const revealItems = $$(".reveal");
-    const revealObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
+      themeToggle.addEventListener('click', () => {
+        const nextTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', nextTheme);
+        applyTheme(nextTheme);
+      });
+
+      // Listen for system theme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+          applyTheme(e.matches ? 'dark' : 'light');
+        }
+      });
+
+      // ============================================================
+      // Mobile Navigation
+      // ============================================================
+      const navToggle = $('#navToggle');
+      const primaryNav = $('#primaryNav');
+      const navLinks = $$('.nav-link');
+
+      navToggle.addEventListener('click', () => {
+        const isOpen = primaryNav.classList.toggle('open');
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+        navToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+        navToggle.innerHTML = isOpen
+          ? '<i class="fa-solid fa-xmark" aria-hidden="true"></i><span class="mono-font">Close</span>'
+          : '<i class="fa-solid fa-bars" aria-hidden="true"></i><span class="mono-font">Menu</span>';
+      });
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth <= 768 && primaryNav.classList.contains('open')) {
+            primaryNav.classList.remove('open');
+            navToggle.setAttribute('aria-expanded', 'false');
+            navToggle.setAttribute('aria-label', 'Open navigation menu');
+            navToggle.innerHTML = '<i class="fa-solid fa-bars" aria-hidden="true"></i><span class="mono-font">Menu</span>';
+          }
+        });
+      });
+
+      // Close menu on escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && primaryNav.classList.contains('open')) {
+          primaryNav.classList.remove('open');
+          navToggle.setAttribute('aria-expanded', 'false');
+          navToggle.focus();
+        }
+      });
+
+      // ============================================================
+      // Active Navigation on Scroll
+      // ============================================================
+      const sections = $$('main section[id]');
+      const navMap = new Map(navLinks.map(link => [link.getAttribute('href').slice(1), link]));
+
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const id = entry.target.id;
+          const link = navMap.get(id);
+          if (entry.isIntersecting && link) {
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-30% 0px -60% 0px', threshold: 0.1 });
+
+      sections.forEach(section => sectionObserver.observe(section));
+
+      // ============================================================
+      // Smooth Scroll Offset for Fixed Header
+      // ============================================================
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          const target = document.querySelector(targetId);
+          if (target) {
+            e.preventDefault();
+            const headerHeight = document.querySelector('.site-header').offsetHeight;
+            const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerHeight;
+            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+            target.focus({ preventScroll: true });
+          }
+        });
+      });
+
+      // ============================================================
+      // Hero Canvas Particle Animation
+      // ============================================================
+      const canvas = $('#heroCanvas');
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      let animationId = null;
+      let canvasWidth = 0;
+      let canvasHeight = 0;
+
+      function resizeCanvas() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        canvasWidth = rect.width;
+        canvasHeight = rect.height;
+        canvas.width = canvasWidth * window.devicePixelRatio;
+        canvas.height = canvasHeight * window.devicePixelRatio;
+        canvas.style.width = canvasWidth + 'px';
+        canvas.style.height = canvasHeight + 'px';
+        ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        initParticles();
+      }
+
+      class Particle {
+        constructor() {
+          this.reset();
+        }
+        reset() {
+          this.x = Math.random() * canvasWidth;
+          this.y = Math.random() * canvasHeight;
+          this.size = Math.random() * 2 + 1;
+          this.speedX = (Math.random() - 0.5) * 0.3;
+          this.speedY = (Math.random() - 0.5) * 0.3;
+          this.opacity = Math.random() * 0.5 + 0.1;
+          this.color = Math.random() > 0.7 ? 'primary-light' : 'primary';
+        }
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          // Wrap around edges
+          if (this.x < 0) this.x = canvasWidth;
+          if (this.x > canvasWidth) this.x = 0;
+          if (this.y < 0) this.y = canvasHeight;
+          if (this.y > canvasHeight) this.y = 0;
+        }
+        draw() {
+          const isDark = root.getAttribute('data-theme') === 'dark';
+          const color = this.color === 'primary-light'
+            ? (isDark ? 'rgba(72, 202, 228, ' : 'rgba(0, 119, 182, ')
+            : (isDark ? 'rgba(0, 119, 182, ' : 'rgba(2, 62, 138, ');
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = color + this.opacity + ')';
+          ctx.fill();
+        }
+      }
+
+      function initParticles() {
+        const count = prefersReducedMotion() ? 0 : 60;
+        particles = [];
+        for (let i = 0; i < count; i++) {
+          particles.push(new Particle());
+        }
+      }
+
+      function animateParticles() {
+        if (prefersReducedMotion()) return;
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        particles.forEach(p => { p.update(); p.draw(); });
+        // Draw connections
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 120) {
+              const opacity = (1 - dist / 120) * 0.1;
+              const isDark = root.getAttribute('data-theme') === 'dark';
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = isDark ? `rgba(72, 202, 228, ${opacity})` : `rgba(0, 119, 182, ${opacity})`;
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
+          }
+        }
+        animationId = requestAnimationFrame(animateParticles);
+      }
+
+      function startParticleAnimation() {
+        if (prefersReducedMotion()) {
+          canvas.style.display = 'none';
+          $('.hero-static-fallback').style.display = 'block';
+          return;
+        }
+        resizeCanvas();
+        animateParticles();
+        window.addEventListener('resize', resizeCanvas);
+      }
+
+      // Initialize on load
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', startParticleAnimation);
+      } else {
+        startParticleAnimation();
+      }
+
+      // Re-init particles on theme change
+      const themeObserver = new MutationObserver(() => {
+        if (!prefersReducedMotion()) initParticles();
+      });
+      themeObserver.observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+
+      // ============================================================
+      // Hero Stats Counter Animation
+      // ============================================================
+      const statValues = $$('.stat-value[data-count]');
+      const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
+            const el = entry.target;
+            const target = parseInt(el.dataset.count, 10);
+            const duration = 1500;
+            const start = performance.now();
+            function animate(now) {
+              const progress = Math.min((now - start) / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 3);
+              el.textContent = Math.floor(target * eased);
+              if (progress < 1) requestAnimationFrame(animate);
+              else el.textContent = target;
+            }
+            requestAnimationFrame(animate);
+            statsObserver.unobserve(el);
+          }
+        });
+      }, { threshold: 0.5 });
+      statValues.forEach(el => statsObserver.observe(el));
+
+      // ============================================================
+      // Scroll Reveal Animations
+      // ============================================================
+      const revealElements = $$('.reveal');
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
             observer.unobserve(entry.target);
           }
         });
-      },
-      {
-        threshold: 0.14,
-        rootMargin: "0px 0px -40px 0px"
-      }
-    );
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      revealElements.forEach(el => revealObserver.observe(el));
 
-    revealItems.forEach((item) => revealObserver.observe(item));
-
-    // -----------------------------
-    // Back-to-top button
-    // -----------------------------
-    const backToTop = $("#backToTop");
-
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 500) {
-        backToTop.classList.add("is-visible");
-      } else {
-        backToTop.classList.remove("is-visible");
-      }
-    });
-
-    backToTop.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-
-    // -----------------------------
-    // Footer year
-    // -----------------------------
-    $("#year").textContent = new Date().getFullYear();
-
-    // -----------------------------
-    // Accessible hero carousel
-    // -----------------------------
-    const slides = $$(".hero-slide");
-    const dots = $$(".carousel-dot");
-    const prevSlideBtn = $("#prevSlide");
-    const nextSlideBtn = $("#nextSlide");
-    const toggleAutoplayBtn = $("#toggleAutoplay");
-    const carouselStatus = $("#carouselStatus");
-    const heroShell = $(".hero-shell");
-
-    let currentSlide = 0;
-    let autoplay = true;
-    let autoplayTimer = null;
-    const autoplayDelay = 5500;
-
-    function updateCarousel(index, announce = true) {
-      currentSlide = (index + slides.length) % slides.length;
-
-      slides.forEach((slide, slideIndex) => {
-        const isActive = slideIndex === currentSlide;
-        slide.classList.toggle("is-active", isActive);
-        slide.setAttribute("aria-hidden", String(!isActive));
+      // ============================================================
+      // Back to Top Button
+      // ============================================================
+      const backToTop = $('#backToTop');
+      let scrollTimer = null;
+      window.addEventListener('scroll', () => {
+        if (scrollTimer) cancelAnimationFrame(scrollTimer);
+        scrollTimer = requestAnimationFrame(() => {
+          backToTop.classList.toggle('visible', window.scrollY > 300);
+        });
+      });
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
 
-      dots.forEach((dot, dotIndex) => {
-        const isActive = dotIndex === currentSlide;
-        dot.setAttribute("aria-selected", String(isActive));
+      // ============================================================
+      // Testimonial Slider
+      // ============================================================
+      const testimonialTrack = $('#testimonialTrack');
+      const testimonialSlides = $$('.testimonial-slide');
+      const testimonialPrev = $('#testimonialPrev');
+      const testimonialNext = $('#testimonialNext');
+      let testimonialIndex = 0;
+
+      function updateTestimonial() {
+        testimonialTrack.style.transform = `translateX(-${testimonialIndex * 100}%)`;
+      }
+
+      testimonialPrev.addEventListener('click', () => {
+        testimonialIndex = (testimonialIndex - 1 + testimonialSlides.length) % testimonialSlides.length;
+        updateTestimonial();
       });
 
-      if (announce && carouselStatus) {
-        carouselStatus.textContent = `Showing slide ${currentSlide + 1} of ${slides.length}`;
-      }
-    }
-
-    function nextSlide() {
-      updateCarousel(currentSlide + 1);
-    }
-
-    function prevSlide() {
-      updateCarousel(currentSlide - 1);
-    }
-
-    function startAutoplay() {
-      stopAutoplay();
-      autoplayTimer = setInterval(() => {
-        nextSlide();
-      }, autoplayDelay);
-    }
-
-    function stopAutoplay() {
-      if (autoplayTimer) {
-        clearInterval(autoplayTimer);
-        autoplayTimer = null;
-      }
-    }
-
-    function syncAutoplayButton() {
-      toggleAutoplayBtn.setAttribute("aria-pressed", String(!autoplay));
-      toggleAutoplayBtn.setAttribute(
-        "aria-label",
-        autoplay ? "Pause automatic slide show" : "Resume automatic slide show"
-      );
-      toggleAutoplayBtn.innerHTML = autoplay
-        ? '<i class="fa-solid fa-pause" aria-hidden="true"></i><span>Pause slideshow</span>'
-        : '<i class="fa-solid fa-play" aria-hidden="true"></i><span>Resume slideshow</span>';
-    }
-
-    prevSlideBtn.addEventListener("click", () => {
-      prevSlide();
-      stopAutoplay();
-      autoplay = false;
-      syncAutoplayButton();
-    });
-
-    nextSlideBtn.addEventListener("click", () => {
-      nextSlide();
-      stopAutoplay();
-      autoplay = false;
-      syncAutoplayButton();
-    });
-
-    dots.forEach((dot) => {
-      dot.addEventListener("click", () => {
-        const target = Number(dot.dataset.slideTo);
-        updateCarousel(target);
-        stopAutoplay();
-        autoplay = false;
-        syncAutoplayButton();
+      testimonialNext.addEventListener('click', () => {
+        testimonialIndex = (testimonialIndex + 1) % testimonialSlides.length;
+        updateTestimonial();
       });
-    });
 
-    toggleAutoplayBtn.addEventListener("click", () => {
-      autoplay = !autoplay;
-      syncAutoplayButton();
-      if (autoplay) {
-        startAutoplay();
-      } else {
-        stopAutoplay();
+      // Keyboard navigation for testimonials
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' && document.activeElement === testimonialPrev) return;
+        if (e.key === 'ArrowRight' && document.activeElement === testimonialNext) return;
+      });
+
+      // Auto-rotate testimonials (paused on hover)
+      let testimonialTimer = setInterval(() => {
+        testimonialIndex = (testimonialIndex + 1) % testimonialSlides.length;
+        updateTestimonial();
+      }, 6000);
+
+      testimonialTrack.parentElement.addEventListener('mouseenter', () => clearInterval(testimonialTimer));
+      testimonialTrack.parentElement.addEventListener('mouseleave', () => {
+        testimonialTimer = setInterval(() => {
+          testimonialIndex = (testimonialIndex + 1) % testimonialSlides.length;
+          updateTestimonial();
+        }, 6000);
+      });
+
+      // ============================================================
+      // Lightbox Gallery
+      // ============================================================
+      const galleryItems = $$('.gallery-item');
+      const lightbox = $('#lightbox');
+      const lightboxImage = $('#lightboxImage');
+      const lightboxCaption = $('#lightboxCaption');
+      const lightboxClose = $('#lightboxClose');
+      const lightboxPrev = $('#lightboxPrev');
+      const lightboxNext = $('#lightboxNext');
+
+      const lightboxData = galleryItems.map(item => ({
+        src: item.dataset.lightboxSrc,
+        caption: item.dataset.lightboxCaption,
+        alt: item.querySelector('img')?.alt || 'Gallery image'
+      }));
+
+      let lightboxIndex = 0;
+      let lastFocusedElement = null;
+
+      function openLightbox(index) {
+        lightboxIndex = index;
+        lastFocusedElement = document.activeElement;
+        updateLightbox();
+        lightbox.classList.add('active');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        lightboxClose.focus();
+        // Trap focus
+        trapFocus(lightbox);
       }
-    });
 
-    heroShell.addEventListener("mouseenter", stopAutoplay);
-    heroShell.addEventListener("mouseleave", () => {
-      if (autoplay) startAutoplay();
-    });
-
-    heroShell.addEventListener("focusin", stopAutoplay);
-    heroShell.addEventListener("focusout", () => {
-      if (autoplay) startAutoplay();
-    });
-
-    heroShell.addEventListener("keydown", (event) => {
-      if (event.key === "ArrowRight") {
-        nextSlide();
-      } else if (event.key === "ArrowLeft") {
-        prevSlide();
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (lastFocusedElement) lastFocusedElement.focus();
       }
-    });
 
-    updateCarousel(0, false);
-    syncAutoplayButton();
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      startAutoplay();
-    } else {
-      autoplay = false;
-      syncAutoplayButton();
-    }
+      function updateLightbox() {
+        const item = lightboxData[lightboxIndex];
+        lightboxImage.src = item.src;
+        lightboxImage.alt = item.alt;
+        lightboxCaption.textContent = item.caption;
+      }
 
-    // -----------------------------
-    // Lightbox gallery
-    // -----------------------------
-    const galleryButtons = $$(".gallery-item");
-    const lightbox = $("#lightbox");
-    const lightboxImage = $("#lightboxImage");
-    const lightboxCaption = $("#lightboxCaption");
-    const lightboxClose = $("#lightboxClose");
-    const lightboxPrev = $("#lightboxPrev");
-    const lightboxNext = $("#lightboxNext");
-    const lightboxItems = galleryButtons.map((button) => ({
-      src: button.dataset.lightboxSrc,
-      caption: button.dataset.lightboxCaption,
-      alt: $("img", button)?.alt || "Gallery image"
-    }));
+      function nextLightbox() {
+        lightboxIndex = (lightboxIndex + 1) % lightboxData.length;
+        updateLightbox();
+      }
 
-    let lightboxIndex = 0;
-    let lastFocusedElement = null;
+      function prevLightbox() {
+        lightboxIndex = (lightboxIndex - 1 + lightboxData.length) % lightboxData.length;
+        updateLightbox();
+      }
 
-    function openLightbox(index) {
-      lightboxIndex = index;
-      lastFocusedElement = document.activeElement;
-      updateLightbox();
-      lightbox.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-      lightboxClose.focus();
-    }
+      // Focus trap for lightbox
+      function trapFocus(element) {
+        const focusableElements = element.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
 
-    function closeLightbox() {
-      lightbox.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-      if (lastFocusedElement) lastFocusedElement.focus();
-    }
+        element.addEventListener('keydown', function handleTab(e) {
+          if (e.key !== 'Tab') return;
+          if (e.shiftKey) {
+            if (document.activeElement === firstElement) {
+              e.preventDefault();
+              lastElement.focus();
+            }
+          } else {
+            if (document.activeElement === lastElement) {
+              e.preventDefault();
+              firstElement.focus();
+            }
+          }
+        }, { once: false });
+      }
 
-    function updateLightbox() {
-      const item = lightboxItems[lightboxIndex];
-      lightboxImage.src = item.src;
-      lightboxImage.alt = item.alt;
-      lightboxCaption.textContent = item.caption;
-    }
+      galleryItems.forEach((item, index) => {
+        item.addEventListener('click', () => openLightbox(index));
+        item.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openLightbox(index);
+          }
+        });
+      });
 
-    function showNextImage() {
-      lightboxIndex = (lightboxIndex + 1) % lightboxItems.length;
-      updateLightbox();
-    }
+      lightboxClose.addEventListener('click', closeLightbox);
+      lightboxNext.addEventListener('click', nextLightbox);
+      lightboxPrev.addEventListener('click', prevLightbox);
 
-    function showPrevImage() {
-      lightboxIndex = (lightboxIndex - 1 + lightboxItems.length) % lightboxItems.length;
-      updateLightbox();
-    }
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
 
-    galleryButtons.forEach((button, index) => {
-      button.addEventListener("click", () => openLightbox(index));
-    });
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') nextLightbox();
+        if (e.key === 'ArrowLeft') prevLightbox();
+      });
 
-    lightboxClose.addEventListener("click", closeLightbox);
-    lightboxNext.addEventListener("click", showNextImage);
-    lightboxPrev.addEventListener("click", showPrevImage);
+      // ============================================================
+      // Contact Form Validation
+      // ============================================================
+      const form = $('#contactForm');
+      const formStatus = $('#formStatus');
 
-    lightbox.addEventListener("click", (event) => {
-      if (event.target === lightbox) closeLightbox();
-    });
+      const validators = {
+        name: {
+          input: $('#name'),
+          error: $('#nameError'),
+          validate: (value) => value.trim().length >= 2 ? true : 'Please enter your name (minimum 2 characters)'
+        },
+        email: {
+          input: $('#email'),
+          error: $('#emailError'),
+          validate: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim()) ? true : 'Please enter a valid email address'
+        },
+        subject: {
+          input: $('#subject'),
+          error: $('#subjectError'),
+          validate: (value) => value.trim().length >= 5 ? true : 'Please enter a subject (minimum 5 characters)'
+        },
+        message: {
+          input: $('#message'),
+          error: $('#messageError'),
+          validate: (value) => value.trim().length >= 20 ? true : 'Please enter a message (minimum 20 characters)'
+        }
+      };
 
-    document.addEventListener("keydown", (event) => {
-      const isLightboxOpen = lightbox.getAttribute("aria-hidden") === "false";
-      if (!isLightboxOpen) return;
+      function setFieldValid(key) {
+        const field = validators[key];
+        field.input.setAttribute('aria-invalid', 'false');
+        field.input.removeAttribute('aria-describedby');
+        field.error.classList.remove('visible');
+      }
 
-      if (event.key === "Escape") {
-        closeLightbox();
-      } else if (event.key === "ArrowRight") {
-        showNextImage();
-      } else if (event.key === "ArrowLeft") {
-        showPrevImage();
-      } else if (event.key === "Tab") {
-        const focusable = [lightboxClose, lightboxPrev, lightboxNext].filter(Boolean);
-        const first = focusable[0];
-        const last = focusable[focusable.length - 1];
+      function setFieldInvalid(key, message) {
+        const field = validators[key];
+        field.input.setAttribute('aria-invalid', 'true');
+        field.error.textContent = message;
+        field.error.classList.add('visible');
+        field.input.setAttribute('aria-describedby', field.error.id);
+      }
 
-        if (event.shiftKey && document.activeElement === first) {
-          event.preventDefault();
-          last.focus();
-        } else if (!event.shiftKey && document.activeElement === last) {
-          event.preventDefault();
-          first.focus();
+      function validateField(key) {
+        const field = validators[key];
+        const result = field.validate(field.input.value);
+        if (result === true) {
+          setFieldValid(key);
+          return true;
+        } else {
+          setFieldInvalid(key, result);
+          return false;
         }
       }
-    });
 
-    // -----------------------------
-    // Optional form handling stub
-    // -----------------------------
-    const contactForm = $("form");
-    if (contactForm) {
-      contactForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-        alert("This demo form is ready for backend integration.");
+      // Real-time validation on blur
+      Object.keys(validators).forEach(key => {
+        validators[key].input.addEventListener('blur', () => {
+          if (validators[key].input.value.trim() !== '') validateField(key);
+        });
+        validators[key].input.addEventListener('input', () => {
+          if (validators[key].input.getAttribute('aria-invalid') === 'true') validateField(key);
+        });
       });
-    }
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        formStatus.textContent = '';
+        formStatus.className = 'form-status';
+
+        let firstInvalid = null;
+        let isValid = true;
+
+        Object.keys(validators).forEach(key => {
+          if (!validateField(key)) {
+            isValid = false;
+            if (!firstInvalid) firstInvalid = validators[key].input;
+          }
+        });
+
+        if (!isValid) {
+          formStatus.textContent = 'Please fix the errors above and try again.';
+          formStatus.classList.add('error');
+          firstInvalid.focus();
+          return;
+        }
+
+        // Simulate form submission (replace with actual endpoint)
+        formStatus.textContent = 'Sending...';
+        formStatus.classList.remove('error', 'success');
+
+        setTimeout(() => {
+          formStatus.textContent = 'Message sent successfully! I\'ll get back to you within 24 hours.';
+          formStatus.classList.add('success');
+          form.reset();
+          Object.keys(validators).forEach(setFieldValid);
+        }, 1000);
+      });
+
+      // ============================================================
+      // Footer Year
+      // ============================================================
+      $('#year').textContent = new Date().getFullYear();
+
+      // ============================================================
+      // Performance: Passive Event Listeners
+      // ============================================================
+      // All scroll listeners use requestAnimationFrame throttling above
+
+    })();
   </script>
 </body>
 </html>
